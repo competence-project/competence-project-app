@@ -3,4 +3,7 @@
     <string name="app_start">start</string>
     <string name="app_about">about</string>
     <string name="app_exit">exit</string>
+    <string name="app_connect">connect</string>
+    <string name="app_uri">uri</string>
+    <string name="app_back">back</string>
 </resources>
