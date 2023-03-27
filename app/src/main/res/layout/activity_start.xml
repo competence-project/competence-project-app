@@ -2,13 +2,93 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout2"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical"
     android:background="@color/brown_200"
     android:orientation="horizontal"
     tools:context=".StartActivity">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edittext_server_uri"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ems="15"
+        android:hint="@string/app_uri"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="20sp"
+        app:backgroundTint="@color/white"
+        app:colorPrimary="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.272"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        tools:ignore="TextFields" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edittext_client_id"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ems="15"
+        android:hint="@string/app_client_id"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="20sp"
+        app:backgroundTint="@color/white"
+        app:colorPrimary="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.272"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toTopOf="@+id/guideline5"
+        tools:ignore="TextFields" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edittext_username"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ems="15"
+        android:hint="@string/app_username"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="20sp"
+        app:backgroundTint="@color/white"
+        app:colorPrimary="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.272"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toTopOf="@+id/guideline6"
+        tools:ignore="TextFields" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edittext_password"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ems="15"
+        android:hint="@string/app_password"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="20sp"
+        app:backgroundTint="@color/white"
+        app:colorPrimary="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.272"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toTopOf="@+id/guideline7"
+        tools:ignore="TextFields" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/outlinedButtonConnect"
@@ -17,15 +97,34 @@
         android:layout_height="0dp"
         android:text="@string/app_connect"
         android:textColor="@color/brown_400"
+        android:textSize="15sp"
         app:backgroundTint="@color/white"
         app:cornerRadius="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintBottom_toTopOf="@+id/guideline10"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toTopOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/guideline9"
         app:rippleColor="@color/brown_50"
         app:strokeColor="@color/brown_400"
-        app:strokeWidth="3dp"></com.google.android.material.button.MaterialButton>
+        app:strokeWidth="3dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/outlinedButtonClean"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/app_clean"
+        android:textSize="15sp"
+        android:textColor="@color/brown_400"
+        app:backgroundTint="@color/white"
+        app:cornerRadius="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline11"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toTopOf="@+id/guideline10"
+        app:rippleColor="@color/brown_50"
+        app:strokeColor="@color/brown_400"
+        app:strokeWidth="3dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/outlinedButtonBack"
@@ -33,33 +132,19 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/app_back"
+        android:textSize="15sp"
         android:textColor="@color/brown_400"
         app:backgroundTint="@color/white"
         app:cornerRadius="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline7"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toTopOf="@+id/guideline6"
+        app:layout_constraintTop_toTopOf="@+id/guideline11"
+        app:layout_constraintVertical_bias="1.0"
         app:rippleColor="@color/brown_50"
         app:strokeColor="@color/brown_400"
-        app:strokeWidth="3dp"></com.google.android.material.button.MaterialButton>
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/edittext_server_uri"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="15"
-        android:hint="@string/app_uri"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:textColor="@color/white"
-        app:colorPrimary="@color/brown_400"
-        app:layout_constraintBottom_toTopOf="@+id/guideline5"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.272"
-        app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
-        tools:ignore="TextFields" />
+        app:strokeWidth="3dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
@@ -101,14 +186,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.28" />
+        app:layout_constraintGuide_percent="0.30" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.36" />
+        app:layout_constraintGuide_percent="0.40" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.50" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.60" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.70" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.80" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

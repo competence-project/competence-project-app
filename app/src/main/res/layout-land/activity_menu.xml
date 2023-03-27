@@ -17,14 +17,14 @@
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:textColor="@color/white"
-        android:textSize="40dp"
+        android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toTopOf="@+id/guideline3"></com.google.android.material.textview.MaterialTextView>
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageView"
         android:layout_width="190dp"
         android:layout_height="160dp"
         android:src="@drawable/logotype"
@@ -40,6 +40,7 @@
         android:layout_height="0dp"
         android:text="@string/app_start"
         android:textColor="@color/brown_400"
+        android:textSize="15sp"
         app:backgroundTint="@color/white"
         app:cornerRadius="25dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
@@ -48,7 +49,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3"
         app:rippleColor="@color/brown_50"
         app:strokeColor="@color/brown_400"
-        app:strokeWidth="3dp"></com.google.android.material.button.MaterialButton>
+        app:strokeWidth="3dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/outlinedButtonAbout"
@@ -56,6 +57,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/app_about"
+        android:textSize="15sp"
         android:textColor="@color/brown_400"
         app:backgroundTint="@color/white"
         app:cornerRadius="25dp"
@@ -65,7 +67,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline7"
         app:rippleColor="@color/brown_50"
         app:strokeColor="@color/brown_400"
-        app:strokeWidth="3dp"></com.google.android.material.button.MaterialButton>
+        app:strokeWidth="3dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/outlinedButtonExit"
@@ -76,13 +78,14 @@
         android:textColor="@color/brown_400"
         app:backgroundTint="@color/white"
         app:cornerRadius="25dp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toTopOf="@+id/guideline8"
         app:rippleColor="@color/brown_50"
         app:strokeColor="@color/brown_400"
-        app:strokeWidth="3dp"></com.google.android.material.button.MaterialButton>
+        app:strokeWidth="3dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
