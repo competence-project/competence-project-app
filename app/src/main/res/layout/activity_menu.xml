@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout2"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical"
@@ -14,20 +14,19 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewTitle"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:gravity="center"
         android:text="@string/app_name"
         android:textColor="@color/white"
-        android:textSize="40dp"
+        android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:layout_constraintVertical_chainStyle="packed"></com.google.android.material.textview.MaterialTextView>
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageView1"
         android:layout_width="300dp"
         android:layout_height="230dp"
         android:src="@drawable/logotype"
@@ -44,6 +43,7 @@
         android:layout_height="0dp"
         android:text="@string/app_start"
         android:textColor="@color/brown_400"
+        android:textSize="15sp"
         app:backgroundTint="@color/white"
         app:cornerRadius="25dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
@@ -52,7 +52,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline5"
         app:rippleColor="@color/brown_50"
         app:strokeColor="@color/brown_400"
-        app:strokeWidth="3dp"></com.google.android.material.button.MaterialButton>
+        app:strokeWidth="3dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/outlinedButtonAbout"
@@ -61,6 +61,7 @@
         android:layout_height="0dp"
         android:text="@string/app_about"
         android:textColor="@color/brown_400"
+        android:textSize="15sp"
         app:backgroundTint="@color/white"
         app:cornerRadius="25dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
@@ -69,7 +70,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline6"
         app:rippleColor="@color/brown_50"
         app:strokeColor="@color/brown_400"
-        app:strokeWidth="3dp"></com.google.android.material.button.MaterialButton>
+        app:strokeWidth="3dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/outlinedButtonExit"
@@ -78,6 +79,7 @@
         android:layout_height="0dp"
         android:text="@string/app_exit"
         android:textColor="@color/brown_400"
+        android:textSize="15sp"
         app:backgroundTint="@color/white"
         app:cornerRadius="25dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
@@ -86,7 +88,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline7"
         app:rippleColor="@color/brown_50"
         app:strokeColor="@color/brown_400"
-        app:strokeWidth="3dp"></com.google.android.material.button.MaterialButton>
+        app:strokeWidth="3dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
