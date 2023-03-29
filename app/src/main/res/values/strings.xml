@@ -10,4 +10,8 @@
     <string name="app_client_id">client id</string>
     <string name="app_username">username</string>
     <string name="app_password">password</string>
+    <string name="app_topic">topic</string>
+    <string name="app_subscribe">subscribe</string>
+    <string name="app_publish">publish</string>
+    <string name="app_disconnect">disconnect</string>
 </resources>
