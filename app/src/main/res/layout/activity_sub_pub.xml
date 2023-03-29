@@ -11,11 +11,11 @@
     tools:context=".StartActivity">
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/edittext_server_uri"
+        android:id="@+id/edittext_topic"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:ems="15"
-        android:hint="@string/app_uri"
+        android:hint="@string/app_topic"
         android:importantForAutofill="no"
         android:inputType="text"
         android:textColor="@color/white"
@@ -25,77 +25,62 @@
         app:colorPrimary="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.272"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="TextFields" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/edittext_client_id"
+    <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:ems="15"
-        android:hint="@string/app_client_id"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="20sp"
-        app:backgroundTint="@color/white"
-        app:colorPrimary="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.272"
-        app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toTopOf="@+id/guideline5"
-        tools:ignore="TextFields" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/edittext_username"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:ems="15"
-        android:hint="@string/app_username"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="20sp"
-        app:backgroundTint="@color/white"
-        app:colorPrimary="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.272"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toTopOf="@+id/guideline6"
-        tools:ignore="TextFields" />
+        app:layout_constraintTop_toTopOf="@+id/guideline5"
+        app:layout_constraintVertical_bias="0.0" >
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/edittext_password"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:ems="15"
-        android:hint="@string/app_password"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="20sp"
-        app:backgroundTint="@color/white"
-        app:colorPrimary="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/guideline8"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.272"
-        app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toTopOf="@+id/guideline7"
-        tools:ignore="TextFields" />
+        <TextView
+            android:id="@+id/edittext_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="15"
+            android:importantForAutofill="no"
+            android:isScrollContainer="true"
+            android:scrollbars="vertical"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="20sp"
+            app:backgroundTint="@color/white"
+            app:colorPrimary="@color/white" />
+    </ScrollView>
+
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/outlinedButtonConnect"
+        android:id="@+id/outlinedButtonDisconnect"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/app_connect"
+        android:text="@string/app_disconnect"
+        android:textColor="@color/brown_400"
+        android:textSize="15sp"
+        app:backgroundTint="@color/white"
+        app:cornerRadius="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline9"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toTopOf="@+id/guideline8"
+        app:rippleColor="@color/brown_50"
+        app:strokeColor="@color/brown_400"
+        app:strokeWidth="3dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/outlinedButtonSubscribe"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/app_subscribe"
         android:textColor="@color/brown_400"
         android:textSize="15sp"
         app:backgroundTint="@color/white"
@@ -109,13 +94,13 @@
         app:strokeWidth="3dp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/outlinedButtonClean"
+        android:id="@+id/outlinedButtonPublish"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/app_clean"
-        android:textSize="15sp"
+        android:text="@string/app_publish"
         android:textColor="@color/brown_400"
+        android:textSize="15sp"
         app:backgroundTint="@color/white"
         app:cornerRadius="25dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline11"
@@ -182,18 +167,11 @@
         app:layout_constraintGuide_percent="0.20" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.30" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.40" />
+        app:layout_constraintGuide_percent="0.45" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"

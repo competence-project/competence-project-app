@@ -3,16 +3,19 @@ package com.app.competence_project_app;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
-import com.google.android.material.textfield.TextInputEditText;
+import com.hivemq.client.mqtt.MqttClient;
+import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient;
 
-// import com.hivemq.client.mqtt.*;
+import java.util.UUID;
 
 public class StartActivity extends AppCompatActivity {
 
-//    private String clientId;
+    private String clientId;
+    private static Mqtt3AsyncClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,50 +23,57 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+        if(actionBar != null) {
+            actionBar.hide();
+        }
 
-//        clientId = MqttClient.generateClientId();
-//
-//        onButtonConnectEventListener();
+        clientId = UUID.randomUUID().toString();
+
+        onButtonConnectEventListener();
         onButtonBackEventListener();
+        onButtonCleanEventListener();
     }
 
-    private void onButtonBackEventListener() {
+    public void onButtonBackEventListener() {
         Button button = findViewById(R.id.outlinedButtonBack);
-        button.setOnClickListener(view -> {
-            onBackPressed();
-        });
+        button.setOnClickListener(view -> onBackPressed());
     }
 
-//    private void onButtonConnectEventListener() {
-//        Button button = findViewById(R.id.outlinedButtonConnect);
+    private void onButtonCleanEventListener() {
+//        Button button = findViewById(R.id.outlinedButtonClean);
 //        button.setOnClickListener(view -> {
+//
+//        });
+    }
+
+    private void onButtonConnectEventListener() {
+        Button button = findViewById(R.id.outlinedButtonConnect);
+        button.setOnClickListener(view -> {
 //            TextInputEditText textInputEditText = findViewById(R.id.edittext_server_uri);
 //            String serverUri = String.valueOf(textInputEditText.getText());
-//
+
 //            if (!serverUri.isEmpty()) {
 //                connectToBroker(serverUri);
 //            }
-//        });
-//    }
-//
-//    private void connectToBroker(String serverUri) {
-//        try {
-//            MqttAndroidClient client = new MqttAndroidClient(this.getApplicationContext(), serverUri, clientId);
-//            IMqttToken token = client.connect();
-//            token.setActionCallback(new IMqttActionListener() {
-//                @Override
-//                public void onSuccess(IMqttToken asyncActionToken) {
-//                    Log.d(TAG, "Success");
-//                }
-//
-//                @Override
-//                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-//                    Log.d(TAG, "Failure");
-//                }
-//            });
-//        } catch (MqttException e) {
-//            e.printStackTrace();
-//        }
-//    }
+            connectToBroker();
+        });
+    }
+
+    private void connectToBroker() {
+        client = MqttClient.builder()
+                .useMqttVersion3()
+                .identifier(clientId)
+                .serverHost("broker.hivemq.com")
+                .buildAsync();
+
+        client.connect();
+
+
+        Intent intent = new Intent(this, ConnectedActivity.class);
+        startActivity(intent);
+    }
+
+    public static Mqtt3AsyncClient getClient() {
+        return client;
+    }
 }

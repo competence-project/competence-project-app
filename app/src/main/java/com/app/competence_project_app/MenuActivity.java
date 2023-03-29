@@ -15,7 +15,9 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+        if(actionBar != null) {
+            actionBar.hide();
+        }
 
         onButtonStartEventListener();
         onButtonExitEventListener();
@@ -23,10 +25,8 @@ public class MenuActivity extends AppCompatActivity {
 
     private void onButtonStartEventListener() {
         Intent intent = new Intent(MenuActivity.this, StartActivity.class);
-        Button button = findViewById(R.id.outlinedButtonSimple);
-        button.setOnClickListener(view -> {
-            startActivity(intent);
-        });
+        Button button = findViewById(R.id.outlinedButtonStart);
+        button.setOnClickListener(view -> startActivity(intent));
     }
 
     private void onButtonExitEventListener() {
