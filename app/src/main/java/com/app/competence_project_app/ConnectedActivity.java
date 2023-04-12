@@ -1,5 +1,6 @@
 package com.app.competence_project_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ public class ConnectedActivity  extends AppCompatActivity {
         onClickSubscribe();
         onClickPublish();
         onClickDisconnect();
+        onClickHistory();
     }
 
     private void onButtonBackEventListener() {
@@ -80,6 +82,14 @@ public class ConnectedActivity  extends AppCompatActivity {
         button.setOnClickListener(view -> {
             client.disconnect();
             cmd.append("disconnected\n");
+        });
+    }
+
+    private void onClickHistory() {
+        Intent intent = new Intent(ConnectedActivity.this, HistoryActivity.class);
+        Button button = findViewById(R.id.outlinedButtonHistory);
+        button.setOnClickListener( view -> {
+            startActivity(intent);
         });
     }
 }
