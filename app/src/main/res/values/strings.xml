@@ -14,4 +14,5 @@
     <string name="app_subscribe">subscribe</string>
     <string name="app_publish">publish</string>
     <string name="app_disconnect">disconnect</string>
+    <string name="app_history">History</string>
 </resources>
