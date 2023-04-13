@@ -23,7 +23,7 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
 
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null) {
+        if (actionBar != null) {
             actionBar.hide();
         }
 
@@ -40,21 +40,11 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void onButtonCleanEventListener() {
-//        Button button = findViewById(R.id.outlinedButtonClean);
-//        button.setOnClickListener(view -> {
-//
-//        });
     }
 
     private void onButtonConnectEventListener() {
         Button button = findViewById(R.id.outlinedButtonConnect);
         button.setOnClickListener(view -> {
-//            TextInputEditText textInputEditText = findViewById(R.id.edittext_server_uri);
-//            String serverUri = String.valueOf(textInputEditText.getText());
-
-//            if (!serverUri.isEmpty()) {
-//                connectToBroker(serverUri);
-//            }
             connectToBroker();
         });
     }

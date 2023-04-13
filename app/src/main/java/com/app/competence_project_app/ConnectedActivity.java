@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hivemq.client.mqtt.datatypes.MqttQos;
 import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient;
 
-public class ConnectedActivity  extends AppCompatActivity {
+public class ConnectedActivity extends AppCompatActivity {
 
     private Mqtt3AsyncClient client;
     private TextView cmd;
@@ -22,7 +22,7 @@ public class ConnectedActivity  extends AppCompatActivity {
         setContentView(R.layout.activity_sub_pub);
 
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null) {
+        if (actionBar != null) {
             actionBar.hide();
         }
 
@@ -44,36 +44,36 @@ public class ConnectedActivity  extends AppCompatActivity {
     private void onClickSubscribe() {
         Button button = findViewById(R.id.outlinedButtonSubscribe);
         button.setOnClickListener(view ->
-            client.subscribeWith()
-                    .topicFilter("my/topic")
-                    .qos(MqttQos.AT_LEAST_ONCE)
-                    .callback(response -> cmd.append(response + "\n"))
-                    .send()
-                    .whenComplete((subAck, throwable) -> {
-                        if (throwable != null) {
-                            cmd.append("failure - subscribe\n");
-                        } else {
-                            cmd.append("success - subscribe\n");
-                        }
-                    })
+                client.subscribeWith()
+                        .topicFilter("my/topic")
+                        .qos(MqttQos.AT_LEAST_ONCE)
+                        .callback(response -> cmd.append(response + "\n"))
+                        .send()
+                        .whenComplete((subAck, throwable) -> {
+                            if (throwable != null) {
+                                cmd.append("failure - subscribe\n");
+                            } else {
+                                cmd.append("success - subscribe\n");
+                            }
+                        })
         );
     }
 
     private void onClickPublish() {
         Button button = findViewById(R.id.outlinedButtonPublish);
         button.setOnClickListener(view ->
-            client.publishWith()
-                    .topic("my/topic")
-                    .payload("1".getBytes())
-                    .qos(MqttQos.EXACTLY_ONCE)
-                    .send()
-                    .whenComplete((mqtt3Publish, throwable1) -> {
-                        if (throwable1 != null) {
-                            cmd.append("failure - publish\n");
-                        } else {
-                            cmd.append("success - publish\n");
-                        }
-                    })
+                client.publishWith()
+                        .topic("my/topic")
+                        .payload("1".getBytes())
+                        .qos(MqttQos.EXACTLY_ONCE)
+                        .send()
+                        .whenComplete((mqtt3Publish, throwable1) -> {
+                            if (throwable1 != null) {
+                                cmd.append("failure - publish\n");
+                            } else {
+                                cmd.append("success - publish\n");
+                            }
+                        })
         );
     }
 
@@ -88,7 +88,7 @@ public class ConnectedActivity  extends AppCompatActivity {
     private void onClickHistory() {
         Intent intent = new Intent(ConnectedActivity.this, HistoryActivity.class);
         Button button = findViewById(R.id.outlinedButtonHistory);
-        button.setOnClickListener( view -> {
+        button.setOnClickListener(view -> {
             startActivity(intent);
         });
     }
