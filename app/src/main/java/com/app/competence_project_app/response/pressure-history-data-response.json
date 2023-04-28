@@ -1,0 +1,35 @@
+{
+  "request_datetime": {
+    "from": "2023-04-11T12:23:21",
+    "to": "2023-04-15T12:23:21",
+    "timezone_offset": "7200"
+  },
+  "sensor": {
+    "mac_address": "30AEA4070D64",
+    "localization": "Main hall"
+  },
+  "name": "pressure",
+  "unit": "hPa",
+  "measurement_list": [
+    {
+      "datetime": "2023-04-11T12:43:21",
+      "result": 1012
+    },
+    {
+      "datetime": "2023-04-12T15:53:29",
+      "result": 1011
+    },
+    {
+      "datetime": "2023-04-13T16:13:05",
+      "result": 1023
+    },
+    {
+      "datetime": "2023-04-14T09:54:14",
+      "result": 1014
+    },
+    {
+      "datetime": "2023-04-15T10:13:21",
+      "result": 1017
+    }
+  ]
+}
