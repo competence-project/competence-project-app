@@ -6,15 +6,22 @@
     android:layout_height="match_parent"
     android:background="@drawable/ic_app_background" >
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/temperature_chart_fragment"
-        android:name="com.app.competence_project_app.fragment.TemperatureChartFragment"
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintTop_toTopOf="@+id/guideline4">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="auto">
+
+        </androidx.viewpager2.widget.ViewPager2>
+    </FrameLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
