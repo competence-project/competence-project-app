@@ -2,7 +2,7 @@ package com.app.competence_project_app.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class DateTime {
+public class RequestDateTime {
 
     private String from;
 
