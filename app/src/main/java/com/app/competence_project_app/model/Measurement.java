@@ -2,28 +2,28 @@ package com.app.competence_project_app.model;
 
 public class Measurement {
 
-      private String datetime;
+    private String datetime;
 
-      private double result;
+    private float result;
 
-      public Measurement(String datetime, double result) {
-            this.datetime = datetime;
-            this.result = result;
-      }
+    public Measurement(String datetime, float result) {
+        this.datetime = datetime;
+        this.result = result;
+    }
 
-      public String getDatetime() {
-            return datetime;
-      }
+    public String getDatetime() {
+        return datetime;
+    }
 
-      public void setDatetime(String datetime) {
-            this.datetime = datetime;
-      }
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
+    }
 
-      public double getResult() {
-            return result;
-      }
+    public float getResult() {
+        return result;
+    }
 
-      public void setResult(double result) {
-            this.result = result;
-      }
+    public void setResult(float result) {
+        this.result = result;
+    }
 }
