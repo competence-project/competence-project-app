@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragment.TemperatureChartFragment">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/chart_title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".2"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".6" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".2"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_daily"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4sp"
+            android:paddingBottom="4sp"
+            android:textSize="11sp"
+            android:textColor="@color/brown_400"
+            android:backgroundTint="#FFFFFF"
+            android:text="Weekly" />
+
+        <android.widget.Space
+            android:layout_width="20sp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_weekly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4sp"
+            android:paddingBottom="4sp"
+            android:textSize="11sp"
+            android:textColor="@color/brown_400"
+            android:backgroundTint="#FFFFFF"
+            android:text="Monthly" />
+
+        <android.widget.Space
+            android:layout_width="20sp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_monthly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4sp"
+            android:paddingBottom="4sp"
+            android:textSize="11sp"
+            android:textColor="@color/brown_400"
+            android:backgroundTint="#FFFFFF"
+            android:text="Yearly" />
+    </LinearLayout>
+
+</LinearLayout>
