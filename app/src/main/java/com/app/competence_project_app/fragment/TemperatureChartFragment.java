@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.app.competence_project_app.R;
 import com.app.competence_project_app.api.WeatherDataApiCallback;
@@ -45,6 +46,8 @@ import java.util.stream.Collectors;
  */
 public class TemperatureChartFragment extends Fragment {
 
+    private int pageNumber;
+
     private LineChart lineChart;
 
     private MaterialTextView chartTitle;
@@ -56,11 +59,20 @@ public class TemperatureChartFragment extends Fragment {
     public TemperatureChartFragment() {
     }
 
-    public static TemperatureChartFragment newInstance() {
+    public static TemperatureChartFragment newInstance(Integer pageNumber) {
         TemperatureChartFragment fragment = new TemperatureChartFragment();
         Bundle args = new Bundle();
+        args.putInt("pageNumber", pageNumber);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            pageNumber = getArguments().getInt("pageNumber");
+        }
     }
 
     @Override
@@ -130,10 +142,11 @@ public class TemperatureChartFragment extends Fragment {
         LocalDateTime from = LocalDateTime.parse("2023-04-11T12:43:21");
         LocalDateTime to = LocalDateTime.parse("2023-04-15T12:43:21");
         long sensorId = 1;
+
         WeatherDataApiImpl.getInstance().getAllWeatherData(sensorId, from, to, new WeatherDataApiCallback<WeatherDataAllResponseDto>() {
             @Override
             public void onSuccess(WeatherDataAllResponseDto body) {
-                Data data = body.getDataList().get(2);
+                Data data = body.getDataList().get(pageNumber);
                 unit = data.getUnit();
                 String name = data.getName().toLowerCase();
                 chartTitle.setText(name.substring(0, 1).toUpperCase() + name.substring(1));
