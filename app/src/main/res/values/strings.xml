@@ -6,6 +6,7 @@
     <string name="app_connect">connect</string>
     <string name="app_uri">uri</string>
     <string name="app_back">back</string>
+    <string name="app_real_time">real-time</string>
     <string name="app_clean">clean</string>
     <string name="app_client_id">client id</string>
     <string name="app_username">username</string>

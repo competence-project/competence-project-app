@@ -112,11 +112,11 @@
         app:strokeWidth="3dp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/outlinedButtonBack"
+        android:id="@+id/outlinedButtonRealTime"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/app_back"
+        android:text="@string/app_real_time"
         android:textColor="@color/brown_400"
         android:textSize="15sp"
         app:backgroundTint="@color/white"

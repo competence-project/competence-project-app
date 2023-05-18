@@ -26,6 +26,9 @@
             android:name=".ConnectedActivity"
             android:exported="false" />
         <activity
+            android:name=".RealTimeActivity"
+            android:exported="false" />
+        <activity
             android:name=".MenuActivity"
             android:exported="true">
             <intent-filter>

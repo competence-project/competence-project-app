@@ -36,7 +36,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     public void onButtonBackEventListener() {
-        Button button = findViewById(R.id.outlinedButtonBack);
+        Button button = findViewById(R.id.outlinedButtonRealTime);
         button.setOnClickListener(view -> onBackPressed());
     }
 

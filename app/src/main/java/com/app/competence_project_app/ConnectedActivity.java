@@ -29,16 +29,19 @@ public class ConnectedActivity extends AppCompatActivity {
         client = StartActivity.getClient();
         cmd = findViewById(R.id.edittext_result);
 
-        onButtonBackEventListener();
+        onButtonRealTimeEventListener();
         onClickSubscribe();
         onClickPublish();
         onClickDisconnect();
         onClickHistory();
     }
 
-    private void onButtonBackEventListener() {
-        Button button = findViewById(R.id.outlinedButtonBack);
-        button.setOnClickListener(view -> onBackPressed());
+    private void onButtonRealTimeEventListener() {
+        Intent intent = new Intent(ConnectedActivity.this, RealTimeActivity.class);
+        Button button = findViewById(R.id.outlinedButtonRealTime);
+        button.setOnClickListener(view -> {
+            startActivity(intent);
+        });
     }
 
     private void onClickSubscribe() {
