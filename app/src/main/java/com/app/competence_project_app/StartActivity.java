@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.hivemq.client.mqtt.MqttClient;
 import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient;
@@ -50,10 +51,12 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void connectToBroker() {
+        String text = ((EditText)findViewById(R.id.edittext_server_uri)).getText().toString();
+        System.out.println(text);
         client = MqttClient.builder()
                 .useMqttVersion3()
                 .identifier(clientId)
-                .serverHost("broker.hivemq.com")
+                .serverHost(text)
                 .buildAsync();
 
         client.connect();
