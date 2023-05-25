@@ -4,17 +4,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.hivemq.client.mqtt.datatypes.MqttQos;
 import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient;
+
+import java.util.Objects;
 
 public class ConnectedActivity extends AppCompatActivity {
 
     private Mqtt3AsyncClient client;
     private TextView cmd;
+    private TextInputEditText topic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,7 @@ public class ConnectedActivity extends AppCompatActivity {
 
         client = StartActivity.getClient();
         cmd = findViewById(R.id.edittext_result);
+        topic = findViewById(R.id.edittext_topic);
 
         onButtonRealTimeEventListener();
         onClickSubscribe();
@@ -48,15 +54,19 @@ public class ConnectedActivity extends AppCompatActivity {
         Button button = findViewById(R.id.outlinedButtonSubscribe);
         button.setOnClickListener(view ->
                 client.subscribeWith()
-                        .topicFilter("my/topic")
+                        .topicFilter(Objects.requireNonNull(topic.getText()).toString())
                         .qos(MqttQos.AT_LEAST_ONCE)
-                        .callback(response -> cmd.append(response + "\n"))
+                        .callback(response -> System.out.println(response + "\n"))
                         .send()
                         .whenComplete((subAck, throwable) -> {
                             if (throwable != null) {
-                                cmd.append("failure - subscribe\n");
+//                                System.out.println("PORAŻKA");
+//                                cmd.append("failure - subscribe on topic: " + topic.getText().toString() + "\n");
+                                Toast.makeText(ConnectedActivity.this,"failure", Toast.LENGTH_SHORT).show();
                             } else {
-                                cmd.append("success - subscribe\n");
+//                                System.out.println("SUKCES");
+//                                cmd.append("success - subscribe on topic: " + topic.getText().toString() + "\n");
+                                Toast.makeText(getBaseContext(),"success",Toast.LENGTH_SHORT).show();
                             }
                         })
         );
@@ -66,15 +76,15 @@ public class ConnectedActivity extends AppCompatActivity {
         Button button = findViewById(R.id.outlinedButtonPublish);
         button.setOnClickListener(view ->
                 client.publishWith()
-                        .topic("my/topic")
+                        .topic(Objects.requireNonNull(topic.getText()).toString())
                         .payload("1".getBytes())
                         .qos(MqttQos.EXACTLY_ONCE)
                         .send()
                         .whenComplete((mqtt3Publish, throwable1) -> {
                             if (throwable1 != null) {
-                                cmd.append("failure - publish\n");
+                                cmd.append("failure - publish on topic: " + topic.getText().toString() + "\n");
                             } else {
-                                cmd.append("success - publish\n");
+                                cmd.append("success - publish on topic: " + topic.getText().toString() + "\n");
                             }
                         })
         );
