@@ -5,14 +5,14 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.app.competence_project_app.MVVM.RealTimeViewModel;
+import com.app.competence_project_app.Observer;
 import com.app.competence_project_app.R;
+import com.app.competence_project_app.StringContainer;
 
-public class RealTimeActivity extends AppCompatActivity {
-    private RealTimeViewModel model;
+public class RealTimeActivity extends AppCompatActivity implements Observer {
     static boolean active = false;
 
     @Override
@@ -31,16 +31,21 @@ public class RealTimeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_real_time);
-        model = new ViewModelProvider(this).get(RealTimeViewModel.class);
+//        model = new ViewModelProvider(this).get(RealTimeViewModel.class);
 
         onClickMoveToHistoryActivity(R.id.temperature_value, 0);
         onClickMoveToHistoryActivity(R.id.luminance_value, 1);
         onClickMoveToHistoryActivity(R.id.humidity_value, 2);
         onClickMoveToHistoryActivity(R.id.pressure_value, 3);
 
-        model.getPayload().observe(this, payload -> {
-            setCurrentValue(payload.data, payload.topic);
-        });
+//        model.getPayload().observe(this, payload -> {
+//            setCurrentValue(payload.data, payload.topic);
+//        });
+
+        //    private RealTimeViewModel model;
+        StringContainer stringContainer = (StringContainer) getApplicationContext();
+        stringContainer.registerObserver(this);
+//        setCurrentValue(stringContainer.getData(), stringContainer.getTopic());
     }
 
     private void onClickMoveToHistoryActivity(int buttonID, int slidePage) {
@@ -66,5 +71,18 @@ public class RealTimeActivity extends AppCompatActivity {
         if(button != null) {
             button.setText(data);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        StringContainer myApp = (StringContainer) getApplicationContext();
+        myApp.unregisterObserver(this);
+    }
+
+    @Override
+    public void onStringUpdated(String topic, String data) {
+        setCurrentValue(data, topic);
     }
 }

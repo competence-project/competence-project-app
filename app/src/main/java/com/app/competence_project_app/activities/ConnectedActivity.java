@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.app.competence_project_app.MVVM.RealTimeViewModel;
 import com.app.competence_project_app.R;
+import com.app.competence_project_app.StringContainer;
 import com.google.android.material.textfield.TextInputEditText;
 import com.hivemq.client.mqtt.datatypes.MqttQos;
 import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient;
@@ -25,7 +26,7 @@ public class ConnectedActivity extends AppCompatActivity {
     private Mqtt3AsyncClient client;
     private TextView cmd;
     private TextInputEditText topic;
-    private RealTimeViewModel model;
+//    private RealTimeViewModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class ConnectedActivity extends AppCompatActivity {
             actionBar.hide();
         }
 
-        model = new ViewModelProvider(this).get(RealTimeViewModel.class);
+//        model = new ViewModelProvider(this).get(RealTimeViewModel.class);
 
         client = StartActivity.getClient();
         cmd = findViewById(R.id.edittext_result);
@@ -73,10 +74,12 @@ public class ConnectedActivity extends AppCompatActivity {
                             for (byte b : tab) {
                                 data.append((char) b);
                             }
-                            model.setPayload(new RealTimeViewModel.Payload(
-                                    String.valueOf(data),
-                                    String.valueOf(response.getTopic())
-                            ));
+//                            model.setPayload(new RealTimeViewModel.Payload(
+//                                    String.valueOf(data),
+//                                    String.valueOf(response.getTopic())
+//                            ));
+                            StringContainer stringContainer = (StringContainer) getApplicationContext();
+                            stringContainer.setTopicData(String.valueOf(response.getTopic()), String.valueOf(data));
                             System.out.println(response);
                         } else {
                             System.out.println("Przyjeto jakies dane, ale activity jest wylaczone");
