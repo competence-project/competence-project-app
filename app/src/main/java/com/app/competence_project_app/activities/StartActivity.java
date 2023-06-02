@@ -1,4 +1,4 @@
-package com.app.competence_project_app;
+package com.app.competence_project_app.activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.app.competence_project_app.R;
 import com.hivemq.client.mqtt.MqttClient;
 import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient;
+import com.hivemq.client.mqtt.mqtt3.exceptions.Mqtt3ConnAckException;
 
 import java.util.UUID;
 
@@ -56,10 +58,34 @@ public class StartActivity extends AppCompatActivity {
         client = MqttClient.builder()
                 .useMqttVersion3()
                 .identifier(clientId)
+                .addDisconnectedListener(context -> {
+                    final Throwable cause = context.getCause();
+                    if (cause instanceof Mqtt3ConnAckException) {
+                        System.out.println("disconnect listener: Connect failed because of Negative CONNACK with code {} " + ((Mqtt3ConnAckException) cause).getMqttMessage().getReturnCode());
+                    } else {
+                        System.out.println("disconnect listener: MQTT connect failed because of {}" + cause.getMessage());
+                    }
+                })
                 .serverHost(text)
                 .buildAsync();
 
-        client.connect();
+        client.connectWith()
+                .simpleAuth()
+                    .username("admin")
+                    .password("admin".getBytes())
+                    .applySimpleAuth()
+                .send()
+                .whenComplete((connAck, throwable) -> {
+                    if (connAck != null) {
+                        System.out.println("whenComplete: MQTT connect success with code {}" + connAck.getReturnCode());
+                    } else {
+                        if (throwable instanceof Mqtt3ConnAckException) {
+                            System.out.println("whenComplete: Connect failed because of Negative CONNACK with code {} " + ((Mqtt3ConnAckException) throwable).getMqttMessage().getReturnCode());
+                        } else {
+                            System.out.println("whenComplete: MQTT connect failed because of {}" + throwable.getMessage());
+                        }
+                    }
+                });
 
 
         Intent intent = new Intent(this, ConnectedActivity.class);

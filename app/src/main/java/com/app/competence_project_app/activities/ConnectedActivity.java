@@ -1,4 +1,4 @@
-package com.app.competence_project_app;
+package com.app.competence_project_app.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,18 +8,24 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.app.competence_project_app.MVVM.RealTimeViewModel;
+import com.app.competence_project_app.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.hivemq.client.mqtt.datatypes.MqttQos;
 import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient;
 
 import java.util.Objects;
+import java.util.concurrent.Executors;
 
 public class ConnectedActivity extends AppCompatActivity {
 
     private Mqtt3AsyncClient client;
     private TextView cmd;
     private TextInputEditText topic;
+    private RealTimeViewModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +36,8 @@ public class ConnectedActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
+
+        model = new ViewModelProvider(this).get(RealTimeViewModel.class);
 
         client = StartActivity.getClient();
         cmd = findViewById(R.id.edittext_result);
@@ -52,23 +60,45 @@ public class ConnectedActivity extends AppCompatActivity {
 
     private void onClickSubscribe() {
         Button button = findViewById(R.id.outlinedButtonSubscribe);
-        button.setOnClickListener(view ->
-                client.subscribeWith()
-                        .topicFilter(Objects.requireNonNull(topic.getText()).toString())
-                        .qos(MqttQos.AT_LEAST_ONCE)
-                        .callback(response -> System.out.println(response + "\n"))
-                        .send()
-                        .whenComplete((subAck, throwable) -> {
-                            if (throwable != null) {
+        button.setOnClickListener(view -> {
+//            String tpc = Objects.requireNonNull(topic.getText()).toString();
+            String tpc = "dev/#";
+            client.subscribeWith()
+                    .topicFilter(tpc)
+                    .qos(MqttQos.AT_LEAST_ONCE)
+                    .callback(response -> {
+                        if(RealTimeActivity.active) {
+                            StringBuilder data = new StringBuilder();
+                            byte[] tab = response.getPayloadAsBytes();
+                            for (byte b : tab) {
+                                data.append((char) b);
+                            }
+                            model.setPayload(new RealTimeViewModel.Payload(
+                                    String.valueOf(data),
+                                    String.valueOf(response.getTopic())
+                            ));
+                            System.out.println(response);
+                        } else {
+                            System.out.println("Przyjeto jakies dane, ale activity jest wylaczone");
+                        }
+                    })
+                    .send()
+                    .whenComplete((subAck, throwable) -> {
+                        if (throwable != null) {
 //                                System.out.println("PORAŻKA");
 //                                cmd.append("failure - subscribe on topic: " + topic.getText().toString() + "\n");
-                                Toast.makeText(ConnectedActivity.this,"failure", Toast.LENGTH_SHORT).show();
-                            } else {
+                            Executors.newSingleThreadExecutor().execute(() -> {
+                                Toast.makeText(getApplicationContext(), "failure", Toast.LENGTH_SHORT).show();
+                            });
+                        } else {
 //                                System.out.println("SUKCES");
 //                                cmd.append("success - subscribe on topic: " + topic.getText().toString() + "\n");
-                                Toast.makeText(getBaseContext(),"success",Toast.LENGTH_SHORT).show();
-                            }
-                        })
+//                                Executors.newSingleThreadExecutor().execute(() -> {Toast.makeText(this,"success",Toast.LENGTH_SHORT).show();});
+                            Intent intent = new Intent(ConnectedActivity.this, RealTimeActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+            }
         );
     }
 
