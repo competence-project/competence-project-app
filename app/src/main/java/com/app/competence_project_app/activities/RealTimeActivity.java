@@ -2,34 +2,28 @@ package com.app.competence_project_app.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.app.competence_project_app.R;
+import com.hivemq.client.internal.mqtt.message.unsubscribe.MqttUnsubscribe;
+import com.hivemq.client.internal.util.collections.ImmutableList;
 import com.hivemq.client.mqtt.datatypes.MqttQos;
 import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient;
+import com.hivemq.client.mqtt.mqtt3.message.unsubscribe.Mqtt3Unsubscribe;
 
+import java.util.List;
 import java.util.concurrent.Executors;
 
 public class RealTimeActivity extends AppCompatActivity {
 
     private Mqtt3AsyncClient client;
+    private String topic = "dev/#";
 
-    static boolean active = false;
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        active = true;
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        active = false;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +40,14 @@ public class RealTimeActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Mqtt3Unsubscribe unsubscribe = Mqtt3Unsubscribe.builder()
+                .topicFilter(topic)
+                .build();
+        client.unsubscribe(unsubscribe);
+    }
+
     private void onClickMoveToHistoryActivity(int buttonID, int slidePage) {
         Intent intent = new Intent(RealTimeActivity.this, HistoryActivity.class);
         intent.putExtra("slidePage", slidePage);
@@ -54,40 +56,34 @@ public class RealTimeActivity extends AppCompatActivity {
     }
 
     private void subscribe() {
-        Button button = findViewById(R.id.outlinedButtonSubscribe);
-        button.setOnClickListener(view -> {
-//            String tpc = Objects.requireNonNull(topic.getText()).toString();
-            String tpc = "dev/#";
-            client.subscribeWith()
-                    .topicFilter(tpc)
-                    .qos(MqttQos.AT_LEAST_ONCE)
-                    .callback(response -> {
-                        if(RealTimeActivity.active) {
-                            StringBuilder data = new StringBuilder();
-                            byte[] tab = response.getPayloadAsBytes();
-                            for (byte b : tab) {
-                                data.append((char) b);
-                            }
-                            setCurrentValue(String.valueOf(data), String.valueOf(response.getTopic()));
-                            System.out.println(response);
-                        } else {
-                            System.out.println("Przyjeto jakies dane, ale activity jest wylaczone");
-                        }
-                    })
-                    .send()
-                    .whenComplete((subAck, throwable) -> {
-                        if (throwable != null) {
-                            Executors.newSingleThreadExecutor().execute(() -> {
-                                Toast.makeText(getApplicationContext(), "failure", Toast.LENGTH_SHORT).show();
-                            });
-                        } else {
-                            Executors.newSingleThreadExecutor().execute(() -> {
-                                Toast.makeText(this,"success",Toast.LENGTH_SHORT).show();
-                            });
-                        }
-                    });
-            }
-        );
+        client.subscribeWith()
+                .topicFilter(topic)
+                .qos(MqttQos.AT_LEAST_ONCE)
+                .callback(response -> {
+                    StringBuilder data = new StringBuilder();
+                    byte[] tab = response.getPayloadAsBytes();
+                    for (byte b : tab) {
+                        data.append((char) b);
+                    }
+                    setCurrentValue(String.valueOf(data), String.valueOf(response.getTopic()));
+                    System.out.println(response);
+                })
+                .send()
+                .whenComplete((subAck, throwable) -> {
+                    if (throwable != null) {
+                        new Handler(Looper.getMainLooper()).post(() -> {
+                            Toast toast = Toast.makeText(getApplicationContext(), "subscription failed", Toast.LENGTH_SHORT);
+                            toast.show();
+                            Intent intent = new Intent(RealTimeActivity.this, ConnectedActivity.class);
+                            startActivity(intent);
+                        });
+                    } else {
+                        new Handler(Looper.getMainLooper()).post(() -> {
+                            Toast toast = Toast.makeText(getApplicationContext(), "subscription successful", Toast.LENGTH_SHORT);
+                            toast.show();
+                        });
+                    }
+                });
     }
 
     private void setCurrentValue(String data, String topic) {
