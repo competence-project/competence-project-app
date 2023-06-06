@@ -8,12 +8,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.app.competence_project_app.MVVM.RealTimeViewModel;
 import com.app.competence_project_app.R;
-import com.app.competence_project_app.StringContainer;
 import com.google.android.material.textfield.TextInputEditText;
 import com.hivemq.client.mqtt.datatypes.MqttQos;
 import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient;
@@ -26,7 +22,6 @@ public class ConnectedActivity extends AppCompatActivity {
     private Mqtt3AsyncClient client;
     private TextView cmd;
     private TextInputEditText topic;
-//    private RealTimeViewModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +33,12 @@ public class ConnectedActivity extends AppCompatActivity {
             actionBar.hide();
         }
 
-//        model = new ViewModelProvider(this).get(RealTimeViewModel.class);
-
         client = StartActivity.getClient();
         cmd = findViewById(R.id.edittext_result);
         topic = findViewById(R.id.edittext_topic);
 
         onButtonRealTimeEventListener();
-        onClickSubscribe();
+//        onClickSubscribe();
         onClickPublish();
         onClickDisconnect();
         onClickHistory();
@@ -59,51 +52,51 @@ public class ConnectedActivity extends AppCompatActivity {
         });
     }
 
-    private void onClickSubscribe() {
-        Button button = findViewById(R.id.outlinedButtonSubscribe);
-        button.setOnClickListener(view -> {
-//            String tpc = Objects.requireNonNull(topic.getText()).toString();
-            String tpc = "dev/#";
-            client.subscribeWith()
-                    .topicFilter(tpc)
-                    .qos(MqttQos.AT_LEAST_ONCE)
-                    .callback(response -> {
-                        if(RealTimeActivity.active) {
-                            StringBuilder data = new StringBuilder();
-                            byte[] tab = response.getPayloadAsBytes();
-                            for (byte b : tab) {
-                                data.append((char) b);
-                            }
-//                            model.setPayload(new RealTimeViewModel.Payload(
-//                                    String.valueOf(data),
-//                                    String.valueOf(response.getTopic())
-//                            ));
-                            StringContainer stringContainer = (StringContainer) getApplicationContext();
-                            stringContainer.setTopicData(String.valueOf(response.getTopic()), String.valueOf(data));
-                            System.out.println(response);
-                        } else {
-                            System.out.println("Przyjeto jakies dane, ale activity jest wylaczone");
-                        }
-                    })
-                    .send()
-                    .whenComplete((subAck, throwable) -> {
-                        if (throwable != null) {
-//                                System.out.println("PORAŻKA");
-//                                cmd.append("failure - subscribe on topic: " + topic.getText().toString() + "\n");
-                            Executors.newSingleThreadExecutor().execute(() -> {
-                                Toast.makeText(getApplicationContext(), "failure", Toast.LENGTH_SHORT).show();
-                            });
-                        } else {
-//                                System.out.println("SUKCES");
-//                                cmd.append("success - subscribe on topic: " + topic.getText().toString() + "\n");
-//                                Executors.newSingleThreadExecutor().execute(() -> {Toast.makeText(this,"success",Toast.LENGTH_SHORT).show();});
-                            Intent intent = new Intent(ConnectedActivity.this, RealTimeActivity.class);
-                            startActivity(intent);
-                        }
-                    });
-            }
-        );
-    }
+//    private void onClickSubscribe() {
+//        Button button = findViewById(R.id.outlinedButtonSubscribe);
+//        button.setOnClickListener(view -> {
+////            String tpc = Objects.requireNonNull(topic.getText()).toString();
+//            String tpc = "dev/#";
+//            client.subscribeWith()
+//                    .topicFilter(tpc)
+//                    .qos(MqttQos.AT_LEAST_ONCE)
+//                    .callback(response -> {
+//                        if(RealTimeActivity.active) {
+//                            StringBuilder data = new StringBuilder();
+//                            byte[] tab = response.getPayloadAsBytes();
+//                            for (byte b : tab) {
+//                                data.append((char) b);
+//                            }
+////                            model.setPayload(new RealTimeViewModel.Payload(
+////                                    String.valueOf(data),
+////                                    String.valueOf(response.getTopic())
+////                            ));
+//                            StringContainer stringContainer = (StringContainer) getApplicationContext();
+//                            stringContainer.setTopicData(String.valueOf(response.getTopic()), String.valueOf(data));
+//                            System.out.println(response);
+//                        } else {
+//                            System.out.println("Przyjeto jakies dane, ale activity jest wylaczone");
+//                        }
+//                    })
+//                    .send()
+//                    .whenComplete((subAck, throwable) -> {
+//                        if (throwable != null) {
+////                                System.out.println("PORAŻKA");
+////                                cmd.append("failure - subscribe on topic: " + topic.getText().toString() + "\n");
+//                            Executors.newSingleThreadExecutor().execute(() -> {
+//                                Toast.makeText(getApplicationContext(), "failure", Toast.LENGTH_SHORT).show();
+//                            });
+//                        } else {
+////                                System.out.println("SUKCES");
+////                                cmd.append("success - subscribe on topic: " + topic.getText().toString() + "\n");
+////                                Executors.newSingleThreadExecutor().execute(() -> {Toast.makeText(this,"success",Toast.LENGTH_SHORT).show();});
+////                            Intent intent = new Intent(ConnectedActivity.this, RealTimeActivity.class);
+////                            startActivity(intent);
+//                        }
+//                    });
+//            }
+//        );
+//    }
 
     private void onClickPublish() {
         Button button = findViewById(R.id.outlinedButtonPublish);
