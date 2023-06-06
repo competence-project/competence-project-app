@@ -1,4 +1,4 @@
-package com.app.competence_project_app;
+package com.app.competence_project_app.activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.app.competence_project_app.R;
 import com.app.competence_project_app.adapter.ChartSliderAdapter;
 
 import android.os.Build;
@@ -24,11 +25,17 @@ public class HistoryActivity extends AppCompatActivity {
             actionBar.hide();
         }
 
+        int currentItem = 0;
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            currentItem = extras.getInt("slidePage");
+        }
+
         ViewPager2 viewPager = findViewById(R.id.pager);
         Integer numOfPages = 4;
         FragmentStateAdapter pagerAdapter = new ChartSliderAdapter(this, numOfPages);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setFocusedByDefault(false);
-        viewPager.setCurrentItem(0);
+        viewPager.setCurrentItem(currentItem);
     }
 }

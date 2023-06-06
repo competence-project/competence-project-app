@@ -17,16 +17,19 @@
         android:theme="@style/Theme.Competenceprojectapp"
         tools:targetApi="31">
         <activity
-            android:name=".HistoryActivity"
+            android:name=".activities.HistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".StartActivity"
+            android:name=".activities.StartActivity"
             android:exported="false" />
         <activity
-            android:name=".ConnectedActivity"
+            android:name=".activities.ConnectedActivity"
             android:exported="false" />
         <activity
-            android:name=".MenuActivity"
+            android:name=".activities.RealTimeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.MenuActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

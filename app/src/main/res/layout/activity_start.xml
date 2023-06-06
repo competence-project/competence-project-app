@@ -8,7 +8,7 @@
     android:layout_gravity="center_vertical"
     android:background="@color/brown_200"
     android:orientation="horizontal"
-    tools:context=".StartActivity">
+    tools:context=".activities.StartActivity">
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/edittext_server_uri"
@@ -127,7 +127,7 @@
         app:strokeWidth="3dp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/outlinedButtonBack"
+        android:id="@+id/outlinedButtonRealTime"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"

@@ -6,6 +6,7 @@
     <string name="app_connect">connect</string>
     <string name="app_uri">uri</string>
     <string name="app_back">back</string>
+    <string name="app_real_time">real-time</string>
     <string name="app_clean">clean</string>
     <string name="app_client_id">client id</string>
     <string name="app_username">username</string>
@@ -15,4 +16,12 @@
     <string name="app_publish">publish</string>
     <string name="app_disconnect">disconnect</string>
     <string name="app_history">History</string>
+    <string name="temperature_value">-</string>
+    <string name="temperature">TEMPERATURE</string>
+    <string name="humidity_value">-</string>
+    <string name="humidity">HUMIDITY</string>
+    <string name="luminance_value">-</string>
+    <string name="luminance">LUMINANCE</string>
+    <string name="pressure_value">-</string>
+    <string name="pressure">PRESSURE</string>
 </resources>
