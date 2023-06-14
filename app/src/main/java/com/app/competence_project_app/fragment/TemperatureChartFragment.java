@@ -7,11 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.app.competence_project_app.R;
 import com.app.competence_project_app.api.WeatherDataApiCallback;
@@ -32,6 +32,7 @@ import com.google.android.material.textview.MaterialTextView;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +45,7 @@ import java.util.stream.Collectors;
  * Use the {@link TemperatureChartFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TemperatureChartFragment extends Fragment {
+public class TemperatureChartFragment extends Fragment implements View.OnClickListener {
 
     private int pageNumber;
 
@@ -55,6 +56,9 @@ public class TemperatureChartFragment extends Fragment {
     private List<Entry> entries;
 
     private String unit;
+    LocalDateTime from;
+    LocalDateTime to;
+    Button daily, weekly, monthly;
 
     public TemperatureChartFragment() {
     }
@@ -83,6 +87,13 @@ public class TemperatureChartFragment extends Fragment {
         lineChart = view.findViewById(R.id.chart);
         chartTitle = view.findViewById(R.id.chart_title);
 
+        daily = (Button) view.findViewById(R.id.btn_daily);
+        daily.setOnClickListener(this);
+        weekly = (Button) view.findViewById(R.id.btn_weekly);
+        weekly.setOnClickListener(this);
+        monthly = (Button) view.findViewById(R.id.btn_monthly);
+        monthly.setOnClickListener(this);
+
         return view;
     }
 
@@ -90,6 +101,29 @@ public class TemperatureChartFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //todo - currently set to date from mock
+        from = LocalDateTime.parse("2023-04-11T12:43:21");
+        to = LocalDateTime.parse("2023-04-15T12:43:21");
+        onWeatherDataResponse();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_daily:
+                to = LocalDateTime.now();
+                from = LocalDateTime.now().with(LocalTime.MIN);
+                break;
+            case R.id.btn_weekly:
+                to = LocalDateTime.now();
+                from = LocalDateTime.now().minusWeeks(1).with(LocalTime.MIN);
+                break;
+            case R.id.btn_monthly:
+                to = LocalDateTime.now();
+                from =LocalDateTime.now().minusMonths(1).with(LocalTime.MIN);
+                break;
+        }
         onWeatherDataResponse();
     }
 
@@ -139,8 +173,6 @@ public class TemperatureChartFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void onWeatherDataResponse() {
-        LocalDateTime from = LocalDateTime.parse("2023-04-11T12:43:21");
-        LocalDateTime to = LocalDateTime.parse("2023-04-15T12:43:21");
         long sensorId = 1;
 
         WeatherDataApiImpl.getInstance().getAllWeatherData(sensorId, from, to, new WeatherDataApiCallback<WeatherDataAllResponseDto>() {

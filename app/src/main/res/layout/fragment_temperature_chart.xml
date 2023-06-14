@@ -39,7 +39,7 @@
             android:textSize="11sp"
             android:textColor="@color/brown_400"
             android:backgroundTint="#FFFFFF"
-            android:text="Weekly" />
+            android:text="Day" />
 
         <android.widget.Space
             android:layout_width="20sp"
@@ -54,7 +54,7 @@
             android:textSize="11sp"
             android:textColor="@color/brown_400"
             android:backgroundTint="#FFFFFF"
-            android:text="Monthly" />
+            android:text="Week" />
 
         <android.widget.Space
             android:layout_width="20sp"
@@ -69,7 +69,7 @@
             android:textSize="11sp"
             android:textColor="@color/brown_400"
             android:backgroundTint="#FFFFFF"
-            android:text="Yearly" />
+            android:text="Month" />
     </LinearLayout>
 
 </LinearLayout>
