@@ -3,6 +3,7 @@ package com.app.competence_project_app.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -117,10 +118,12 @@ public class ConnectedActivity extends AppCompatActivity {
     }
 
     private void onClickDisconnect() {
-        Button button = findViewById(R.id.outlinedButtonDisconnect);
-        button.setOnClickListener(view -> {
+        ImageView imageViewButton = findViewById(R.id.outlinedButtonDisconnect);
+        imageViewButton.setOnClickListener(view -> {
             client.disconnect();
             cmd.append("disconnected\n");
+            Intent intent = new Intent(ConnectedActivity.this, StartActivity.class);
+            startActivity(intent);
         });
     }
 

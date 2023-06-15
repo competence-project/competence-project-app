@@ -1,12 +1,12 @@
 package com.app.competence_project_app.activities;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.app.competence_project_app.R;
 import com.hivemq.client.mqtt.MqttClient;
@@ -17,8 +17,12 @@ import java.util.UUID;
 
 public class StartActivity extends AppCompatActivity {
 
-    private String clientId;
     private static Mqtt3AsyncClient client;
+    private String clientId;
+
+    public static Mqtt3AsyncClient getClient() {
+        return client;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +37,7 @@ public class StartActivity extends AppCompatActivity {
         clientId = UUID.randomUUID().toString();
 
         onButtonConnectEventListener();
-        onButtonBackEventListener();
         onButtonCleanEventListener();
-    }
-
-    public void onButtonBackEventListener() {
-        Button button = findViewById(R.id.outlinedButtonRealTime);
-        button.setOnClickListener(view -> onBackPressed());
     }
 
     private void onButtonCleanEventListener() {
@@ -53,7 +51,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void connectToBroker() {
-        String text = ((EditText)findViewById(R.id.edittext_server_uri)).getText().toString();
+        String text = ((EditText) findViewById(R.id.edittext_server_uri)).getText().toString();
         System.out.println(text);
         client = MqttClient.builder()
                 .useMqttVersion3()
@@ -71,9 +69,9 @@ public class StartActivity extends AppCompatActivity {
 
         client.connectWith()
                 .simpleAuth()
-                    .username("admin")
-                    .password("admin".getBytes())
-                    .applySimpleAuth()
+                .username("admin")
+                .password("admin".getBytes())
+                .applySimpleAuth()
                 .send()
                 .whenComplete((connAck, throwable) -> {
                     if (connAck != null) {
@@ -90,9 +88,5 @@ public class StartActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, ConnectedActivity.class);
         startActivity(intent);
-    }
-
-    public static Mqtt3AsyncClient getClient() {
-        return client;
     }
 }
