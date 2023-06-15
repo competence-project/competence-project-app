@@ -1,5 +1,6 @@
 package com.app.competence_project_app.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,6 +8,7 @@ import android.os.Looper;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.app.competence_project_app.R;
@@ -30,6 +32,11 @@ public class RealTimeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_real_time);
 
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
+
         client = StartActivity.getClient();
         subscribe();
 
@@ -40,13 +47,13 @@ public class RealTimeActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        Mqtt3Unsubscribe unsubscribe = Mqtt3Unsubscribe.builder()
-                .topicFilter(topic)
-                .build();
-        client.unsubscribe(unsubscribe);
-    }
+//    @Override
+//    public void onBackPressed() {
+//        Mqtt3Unsubscribe unsubscribe = Mqtt3Unsubscribe.builder()
+//                .topicFilter(topic)
+//                .build();
+//        client.unsubscribe(unsubscribe);
+//    }
 
     private void onClickMoveToHistoryActivity(int buttonID, int slidePage) {
         Intent intent = new Intent(RealTimeActivity.this, HistoryActivity.class);
@@ -65,8 +72,10 @@ public class RealTimeActivity extends AppCompatActivity {
                     for (byte b : tab) {
                         data.append((char) b);
                     }
-                    setCurrentValue(String.valueOf(data), String.valueOf(response.getTopic()));
-                    System.out.println(response);
+                    if(data.length() > 0) {
+                        setCurrentValue(String.valueOf(data), String.valueOf(response.getTopic()));
+                        System.out.println(response);
+                    }
                 })
                 .send()
                 .whenComplete((subAck, throwable) -> {
@@ -86,17 +95,29 @@ public class RealTimeActivity extends AppCompatActivity {
                 });
     }
 
+    @SuppressLint("DefaultLocale")
     private void setCurrentValue(String data, String topic) {
 
         Button button = null;
         if(topic.contains("temp")) {
             button = findViewById(R.id.temperature_value);
+            double tempInKelvin = Double.parseDouble(data);
+            double tempInCelsius = tempInKelvin - 273.15;
+            data = String.format("%.1f", tempInCelsius);
+            data += "°C";
         } else if(topic.contains("lum")) {
             button = findViewById(R.id.luminance_value);
+            double lux = Double.parseDouble(data);
+            data = String.format("%.1f", lux);
+            data += "\nlux";
         } else if(topic.contains("hum")) {
             button = findViewById(R.id.humidity_value);
-        } else if(topic.contains("press")) {
+            data += "%";
+        } else if(topic.contains("pssr")) {
             button = findViewById(R.id.pressure_value);
+            double pssrInPa = Double.parseDouble(data);
+            data = String.format("%.0f", pssrInPa/100);
+            data += "\nhPa";
         }
 
         if(button != null) {
