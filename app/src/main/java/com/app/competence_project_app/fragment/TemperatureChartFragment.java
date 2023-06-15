@@ -31,8 +31,10 @@ import com.google.android.material.textview.MaterialTextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -56,8 +58,8 @@ public class TemperatureChartFragment extends Fragment implements View.OnClickLi
     private List<Entry> entries;
 
     private String unit;
-    LocalDateTime from;
-    LocalDateTime to;
+    private long from;
+    private long to;
     Button daily, weekly, monthly;
 
     public TemperatureChartFragment() {
@@ -97,31 +99,42 @@ public class TemperatureChartFragment extends Fragment implements View.OnClickLi
         return view;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+    @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //todo - currently set to date from mock
-        from = LocalDateTime.parse("2023-04-11T12:43:21");
-        to = LocalDateTime.parse("2023-04-15T12:43:21");
+
+        LocalDate date = LocalDate.now();
+        ZoneOffset zoneOffSet= ZoneOffset.of("+02:00");
+        to = LocalTime.now().toEpochSecond(date, zoneOffSet);
+        from = LocalTime.MIN.toEpochSecond(date, zoneOffSet);
+
         onWeatherDataResponse();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+    @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     public void onClick(View v) {
+        LocalDate date = LocalDate.now();
+        LocalDate dateFROM;
+        LocalTime timeTO = LocalTime.now();
+        LocalTime timeFROM = LocalTime.MIN;
+        ZoneOffset zoneOffSet= ZoneOffset.of("+02:00");
+
         switch (v.getId()) {
             case R.id.btn_daily:
-                to = LocalDateTime.now();
-                from = LocalDateTime.now().with(LocalTime.MIN);
+                to = timeTO.toEpochSecond(date, zoneOffSet);
+                from = timeFROM.toEpochSecond(date, zoneOffSet);
                 break;
             case R.id.btn_weekly:
-                to = LocalDateTime.now();
-                from = LocalDateTime.now().minusWeeks(1).with(LocalTime.MIN);
+                dateFROM = date.minusWeeks(1);
+                to = timeTO.toEpochSecond(date, zoneOffSet);
+                from = timeFROM.toEpochSecond(dateFROM, zoneOffSet);
                 break;
             case R.id.btn_monthly:
-                to = LocalDateTime.now();
-                from =LocalDateTime.now().minusMonths(1).with(LocalTime.MIN);
+                dateFROM = date.minusMonths(1);
+                to = timeTO.toEpochSecond(date, zoneOffSet);
+                from = timeFROM.toEpochSecond(dateFROM, zoneOffSet);
                 break;
         }
         onWeatherDataResponse();
