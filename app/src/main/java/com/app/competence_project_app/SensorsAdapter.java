@@ -9,27 +9,27 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.app.competence_project_app.model.Sensor;
+import com.app.competence_project_app.model.SensorStore;
 
-import java.time.Instant;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.List;
 
 public class SensorsAdapter extends RecyclerView.Adapter<SensorsAdapter.ViewHolder> {
+    ClickListener listener;
 
-    private ArrayList<Sensor> localDataSet;
+    private List<SensorStore> localDataSet;
     Context context;
-    public SensorsAdapter(Context applicationContext) {
+    public SensorsAdapter(Context applicationContext, ClickListener listener) {
         this.context = applicationContext;
+        this.listener = listener;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textViewName;
         TextView textViewMAC;
 
-        public ViewHolder(View v) {
+        public ViewHolder(View v, ClickListener listener) {
             super(v);
+            v.setOnClickListener(view -> listener.click(this.getAdapterPosition()));
             textViewName = (TextView) v.findViewById(R.id.sensorName);
             textViewMAC = (TextView) v.findViewById(R.id.sensorMAC);
         }
@@ -49,15 +49,21 @@ public class SensorsAdapter extends RecyclerView.Adapter<SensorsAdapter.ViewHold
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.sensors_row, viewGroup, false);
 
-        return new SensorsAdapter.ViewHolder(view);
+        return new SensorsAdapter.ViewHolder(view, listener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SensorsAdapter.ViewHolder viewHolder, int position) {
-        Sensor sensor = localDataSet.get(position);
+        SensorStore sensor = localDataSet.get(position);
 
         viewHolder.getTextViewName().setText(sensor.getLocalization());
         viewHolder.getTextViewMAC().setText(sensor.getMacAddress());
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.click(viewHolder.getAdapterPosition());
+            }
+        });
     }
 
     @Override
@@ -65,7 +71,7 @@ public class SensorsAdapter extends RecyclerView.Adapter<SensorsAdapter.ViewHold
         return localDataSet.size();
     }
 
-    public void setData(ArrayList<Sensor> list) {
+    public void setData(List<SensorStore> list) {
         this.localDataSet = list;
         notifyDataSetChanged();
     }

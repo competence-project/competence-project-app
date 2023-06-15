@@ -62,7 +62,7 @@ public class StartActivity extends AppCompatActivity {
         client.connect();
 
 
-        Intent intent = new Intent(this, ConnectedActivity.class);
+        Intent intent = new Intent(this, SensorsListActivity.class);
         startActivity(intent);
     }
 

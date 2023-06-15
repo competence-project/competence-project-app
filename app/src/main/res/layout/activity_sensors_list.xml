@@ -3,25 +3,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/brown_200"
     tools:context=".SensorsListActivity"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/sensorsListTitle"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:textColor="@color/white"
-        android:text="Lista sensorów"
-        android:textAlignment="center"
-        android:textSize="25dp" />
+    <TableRow
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewSensors"
+        <TextView
+            android:id="@+id/sensorsListTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Lista sensorów"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="25dp" />
+    </TableRow>
+
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/sensors_row"/>
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:gravity="center">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewSensors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/sensors_row" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:text="+"
+            app:cornerRadius="28dp"
+            >
+        </Button>
+
+    </TableRow>
 
 </TableLayout>

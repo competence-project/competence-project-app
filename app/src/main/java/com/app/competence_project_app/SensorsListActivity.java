@@ -4,16 +4,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.app.competence_project_app.model.Sensor;
+import com.app.competence_project_app.model.SensorStore;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class SensorsListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
+    Button addButton;
 
+    ClickListener listener;
+
+    List<SensorStore> sensors = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,20 +32,56 @@ public class SensorsListActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewSensors);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        recyclerView.setAdapter(new SensorsAdapter(getApplicationContext()));
+        listener = new ClickListener() {
+            @Override
+            public void click(int index) {
+                Intent intent = new Intent(SensorsListActivity.this, ConnectedActivity.class);
+                startActivity(intent);
+            }
+        };
+        recyclerView.setAdapter(new SensorsAdapter(getApplicationContext(), listener));
 
-        // dummy content
-        Sensor sensor1 = new Sensor("d4:50:68:73:72:e0", "Budynek Alpha");
-        Sensor sensor2 = new Sensor("c3:53:87:f3:46:07", "Budynek Beta");
-        Sensor sensor3 = new Sensor("a8:f4:d6:ce:9f:ab", "Budynek Gamma");
-        Sensor sensor4 = new Sensor("21:16:ec:d4:6b:4a", "Budynek Delta");
+        addButton = (Button) findViewById(R.id.addButton);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToAddSensor(view);
+            }
+        });
+    }
 
-        ArrayList<Sensor> sensors = new ArrayList<>();
-        sensors.add(sensor1);
-        sensors.add(sensor2);
-        sensors.add(sensor3);
-        sensors.add(sensor4);
+    public void goToAddSensor(View view) {
+        Intent intent = new Intent(view.getContext(),  AddSensorActivity.class);
+        startActivity(intent);
+    }
 
-        ((SensorsAdapter) recyclerView.getAdapter()).setData(sensors);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        restoreSavedData();
+        ((SensorsAdapter) recyclerView.getAdapter()).setData(this.sensors);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveData();
+    }
+
+    private void restoreSavedData() {
+        SensorStore[] sensors = (SensorStore[]) SharedPrefUtility.getDataByName("sensors", SensorStore[].class, this.getApplicationContext());
+        if (sensors == null) {
+            this.sensors = new ArrayList<>();
+            return;
+        }
+
+        List<SensorStore> savedSensors = Arrays.asList(sensors);
+        if (savedSensors != null) {
+            this.sensors = savedSensors;
+        }
+    }
+
+    private void saveData() {
+        SharedPrefUtility.setDataByName("sensors", this.sensors, this.getApplicationContext());
     }
 }
