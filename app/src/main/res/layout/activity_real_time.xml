@@ -8,7 +8,7 @@
     android:background="@color/brown_200"
     android:orientation="horizontal">
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/temperature_value"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -18,8 +18,7 @@
         app:backgroundTint="@color/white"
         app:rippleColor="@color/brown_50"
         app:strokeColor="@color/brown_400"
-        app:strokeWidth="3dp"
-        app:cornerRadius="25dp"
+        app:strokeWidth="1.5dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintHorizontal_bias="0.0"
@@ -41,7 +40,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline6"/>
 
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/humidity_value"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -49,15 +48,14 @@
         android:textColor="@color/brown_400"
         android:textSize="27sp"
         app:backgroundTint="@color/white"
-        app:cornerRadius="25dp"
+        app:strokeWidth="1.5dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toTopOf="@+id/guideline5"
         app:rippleColor="@color/brown_50"
-        app:strokeColor="@color/brown_400"
-        app:strokeWidth="3dp" />
+        app:strokeColor="@color/brown_400" />
 
     <TextView
         android:id="@+id/hum"
@@ -74,7 +72,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/luminance_value"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -82,15 +80,14 @@
         android:textColor="@color/brown_400"
         android:textSize="27sp"
         app:backgroundTint="@color/white"
-        app:cornerRadius="25dp"
+        app:strokeWidth="1.5dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
         app:layout_constraintTop_toTopOf="@+id/guideline7"
         app:rippleColor="@color/brown_50"
-        app:strokeColor="@color/brown_400"
-        app:strokeWidth="3dp" />
+        app:strokeColor="@color/brown_400" />
 
     <TextView
         android:id="@+id/lum"
@@ -107,7 +104,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline8" />
 
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/pressure_value"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -115,7 +112,6 @@
         android:textColor="@color/brown_400"
         android:textSize="27sp"
         app:backgroundTint="@color/white"
-        app:cornerRadius="25dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.0"
@@ -123,7 +119,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline7"
         app:rippleColor="@color/brown_50"
         app:strokeColor="@color/brown_400"
-        app:strokeWidth="3dp" />
+        app:strokeWidth="1.5dp" />
 
     <TextView
         android:id="@+id/press"
