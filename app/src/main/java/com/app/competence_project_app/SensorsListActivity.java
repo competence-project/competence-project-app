@@ -36,6 +36,7 @@ public class SensorsListActivity extends AppCompatActivity {
             @Override
             public void click(int index) {
                 Intent intent = new Intent(SensorsListActivity.this, ConnectedActivity.class);
+                intent.putExtra("macAddress", sensors.get(index).getMacAddress());
                 startActivity(intent);
             }
         };

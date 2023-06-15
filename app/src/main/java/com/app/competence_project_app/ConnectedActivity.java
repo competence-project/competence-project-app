@@ -16,9 +16,16 @@ public class ConnectedActivity extends AppCompatActivity {
     private Mqtt3AsyncClient client;
     private TextView cmd;
 
+    private String macAddress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = getIntent();
+        macAddress = intent.getStringExtra("macAddress");
+        System.out.println(macAddress);
+
         setContentView(R.layout.activity_sub_pub);
 
         ActionBar actionBar = getSupportActionBar();
