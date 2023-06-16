@@ -73,8 +73,6 @@ public class AddSensorActivity extends AppCompatActivity {
     }
     @Override
     protected void onResume() {
-        saveData();
-
         super.onResume();
         restoreSavedData();
     }
