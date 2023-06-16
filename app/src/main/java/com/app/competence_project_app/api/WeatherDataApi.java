@@ -1,48 +1,15 @@
 package com.app.competence_project_app.api;
 
 import com.app.competence_project_app.dto.WeatherDataAllResponseDto;
-import com.app.competence_project_app.dto.WeatherDataResponseDto;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
+import retrofit2.http.Path;
 
 public interface WeatherDataApi {
 
-    @GET("/weather/data/all?")
-    Call<WeatherDataAllResponseDto> getAllWeatherData(
-            @Query("sensor") long sensorId,
-            @Query("from") LocalDateTime from,
-            @Query("to") LocalDateTime to
-    );
-
-    @GET("/weather/data/temperature?")
-    Call<WeatherDataResponseDto> getTemperatureWeatherData(
-            @Query("sensor") long sensorId,
-            @Query("from") LocalDateTime from,
-            @Query("to") LocalDateTime to
-    );
-
-    @GET("/weather/data/humidity?")
-    Call<WeatherDataResponseDto> getHumidityWeatherData(
-            @Query("sensor") long sensorId,
-            @Query("from") LocalDateTime from,
-            @Query("to") LocalDateTime to
-    );
-
-    @GET("/weather/data/pressure?")
-    Call<WeatherDataResponseDto> getPressureWeatherData(
-            @Query("sensor") long sensorId,
-            @Query("from") LocalDateTime from,
-            @Query("to") LocalDateTime to
-    );
-
-    @GET("/weather/data/luminance?")
-    Call<WeatherDataResponseDto> getLuminanceWeatherData(
-            @Query("sensor") long sensorId,
-            @Query("from") LocalDateTime from,
-            @Query("to") LocalDateTime to
-    );
+    @GET("/data/{mac_addr}")
+    Call<List<WeatherDataAllResponseDto>> getAllWeatherDataByMacAddress(@Path("mac_addr") long macAddress);
 }
