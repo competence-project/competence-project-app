@@ -6,17 +6,25 @@ import java.util.List;
 
 public class Data {
 
-    private String name;
+    private long id;
 
-    private String unit;
+    private String name;
 
     @SerializedName("measurement_list")
     private List<Measurement> measurementList;
 
-    public Data(String name, String unit, List<Measurement> measurementList) {
+    public Data(long id, String name, List<Measurement> measurementList) {
+        this.id = id;
         this.name = name;
-        this.unit = unit;
         this.measurementList = measurementList;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -25,14 +33,6 @@ public class Data {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
     }
 
     public List<Measurement> getMeasurementList() {
