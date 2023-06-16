@@ -5,8 +5,6 @@ import androidx.annotation.NonNull;
 import com.app.competence_project_app.dto.WeatherDataAllResponseDto;
 import com.app.competence_project_app.dto.WeatherDataResponseDto;
 
-import java.time.LocalDateTime;
-
 import co.infinum.retromock.Retromock;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,7 +32,7 @@ public class WeatherDataApiImpl {
         return weatherDataApiImpl;
     }
 
-    public void getAllWeatherData(long sensorId, LocalDateTime from, LocalDateTime to, WeatherDataApiCallback<WeatherDataAllResponseDto> callback) {
+    public void getAllWeatherData(long sensorId, long from, long to, WeatherDataApiCallback<WeatherDataAllResponseDto> callback) {
         weatherDataApi.getAllWeatherData(sensorId, from, to).enqueue(new Callback<WeatherDataAllResponseDto>() {
             @Override
             public void onResponse(@NonNull Call<WeatherDataAllResponseDto> call, @NonNull Response<WeatherDataAllResponseDto> response) {
@@ -53,7 +51,7 @@ public class WeatherDataApiImpl {
         });
     }
 
-    public void getTemperatureWeatherData(long sensorId, LocalDateTime from, LocalDateTime to, WeatherDataApiCallback<WeatherDataResponseDto> callback) {
+    public void getTemperatureWeatherData(long sensorId, long from, long to, WeatherDataApiCallback<WeatherDataResponseDto> callback) {
         weatherDataApi.getTemperatureWeatherData(sensorId, from, to).enqueue(new Callback<WeatherDataResponseDto>() {
             @Override
             public void onResponse(@NonNull Call<WeatherDataResponseDto> call, @NonNull Response<WeatherDataResponseDto> response) {
@@ -72,7 +70,7 @@ public class WeatherDataApiImpl {
         });
     }
 
-    public void getHumidityWeatherData(long sensorId, LocalDateTime from, LocalDateTime to, WeatherDataApiCallback<WeatherDataResponseDto> callback) {
+    public void getHumidityWeatherData(long sensorId, long from, long to, WeatherDataApiCallback<WeatherDataResponseDto> callback) {
         weatherDataApi.getHumidityWeatherData(sensorId, from, to).enqueue(new Callback<WeatherDataResponseDto>() {
             @Override
             public void onResponse(@NonNull Call<WeatherDataResponseDto> call, @NonNull Response<WeatherDataResponseDto> response) {
@@ -91,7 +89,7 @@ public class WeatherDataApiImpl {
         });
     }
 
-    public void getPressureWeatherData(long sensorId, LocalDateTime from, LocalDateTime to, WeatherDataApiCallback<WeatherDataResponseDto> callback) {
+    public void getPressureWeatherData(long sensorId, long from, long to, WeatherDataApiCallback<WeatherDataResponseDto> callback) {
         weatherDataApi.getPressureWeatherData(sensorId, from, to).enqueue(new Callback<WeatherDataResponseDto>() {
             @Override
             public void onResponse(@NonNull Call<WeatherDataResponseDto> call, @NonNull Response<WeatherDataResponseDto> response) {
@@ -110,7 +108,7 @@ public class WeatherDataApiImpl {
         });
     }
 
-    public void getLuminanceWeatherData(long sensorId, LocalDateTime from, LocalDateTime to, WeatherDataApiCallback<WeatherDataResponseDto> callback) {
+    public void getLuminanceWeatherData(long sensorId, long from, long to, WeatherDataApiCallback<WeatherDataResponseDto> callback) {
         weatherDataApi.getLuminanceWeatherData(sensorId, from, to).enqueue(new Callback<WeatherDataResponseDto>() {
             @Override
             public void onResponse(@NonNull Call<WeatherDataResponseDto> call, @NonNull Response<WeatherDataResponseDto> response) {
