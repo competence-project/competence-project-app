@@ -24,9 +24,15 @@ public class ConnectedActivity extends AppCompatActivity {
     private TextView cmd;
     private TextInputEditText topic;
 
+    private String macAddress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = getIntent();
+        macAddress = intent.getStringExtra("macAddress");
+
         setContentView(R.layout.activity_sub_pub);
 
         ActionBar actionBar = getSupportActionBar();

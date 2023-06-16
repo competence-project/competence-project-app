@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/brown_200"
+    tools:context=".SensorsListActivity"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_alignParentTop="true"
+        android:id="@+id/sensorsListTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Lista sensorów"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="25dp" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_above="@+id/addButton"
+        android:layout_below="@+id/sensorsListTitle"
+        android:id="@+id/recyclerViewSensors"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/sensors_row" />
+
+    <Button
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/addButton"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:text="+"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="@color/brown_400"
+        >
+    </Button>
+
+</RelativeLayout>
