@@ -56,8 +56,8 @@ public class SensorsAdapter extends RecyclerView.Adapter<SensorsAdapter.ViewHold
     public void onBindViewHolder(@NonNull SensorsAdapter.ViewHolder viewHolder, int position) {
         SensorStore sensor = localDataSet.get(position);
 
-        viewHolder.getTextViewName().setText(sensor.getLocalization());
-        viewHolder.getTextViewMAC().setText(sensor.getMacAddress());
+        viewHolder.getTextViewName().setText("Name: ".concat(sensor.getLocalization()));
+        viewHolder.getTextViewMAC().setText("MAC address: ".concat(sensor.getMacAddress()));
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
