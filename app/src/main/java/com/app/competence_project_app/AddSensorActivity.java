@@ -70,7 +70,7 @@ public class AddSensorActivity extends AppCompatActivity {
 
                 sensors.add(new SensorStore(macAddress, name));
                 Toast.makeText(AddSensorActivity.this, "Sensor added", Toast.LENGTH_SHORT).show();
-                clearInputs();
+                finish();
             }
         });
     }
