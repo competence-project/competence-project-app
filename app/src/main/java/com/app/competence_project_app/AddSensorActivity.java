@@ -57,16 +57,19 @@ public class AddSensorActivity extends AppCompatActivity {
                 SensorStore foundSensor = sensors.stream().filter(sensor -> sensor.getMacAddress().equals(macAddress)).findAny().orElse(null);
                 if (foundSensor != null) {
                     Toast.makeText(AddSensorActivity.this, "Sensor with given MAC address already exists", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
                 foundSensor = sensors.stream().filter(sensor -> sensor.getLocalization().equals(name)).findAny().orElse(null);
                 if (foundSensor != null) {
                     Toast.makeText(AddSensorActivity.this, "Sensor with given name already exists", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
                 // TODO: subscribe to check if MAC address is correct
 
                 sensors.add(new SensorStore(macAddress, name));
+                Toast.makeText(AddSensorActivity.this, "Sensor added", Toast.LENGTH_SHORT).show();
                 clearInputs();
             }
         });
