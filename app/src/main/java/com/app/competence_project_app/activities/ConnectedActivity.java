@@ -11,6 +11,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.app.competence_project_app.R;
+import com.app.competence_project_app.util.constant.Constant;
 import com.google.android.material.textfield.TextInputEditText;
 import com.hivemq.client.mqtt.datatypes.MqttQos;
 import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient;
@@ -31,7 +32,7 @@ public class ConnectedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        macAddress = intent.getStringExtra("macAddress");
+        macAddress = intent.getStringExtra(Constant.MAC_ADDRESS);
 
         setContentView(R.layout.activity_sub_pub);
 
@@ -135,6 +136,7 @@ public class ConnectedActivity extends AppCompatActivity {
 
     private void onClickHistory() {
         Intent intent = new Intent(ConnectedActivity.this, HistoryActivity.class);
+        intent.putExtra(Constant.MAC_ADDRESS, macAddress);
         Button button = findViewById(R.id.outlinedButtonHistory);
         button.setOnClickListener(view -> {
             startActivity(intent);

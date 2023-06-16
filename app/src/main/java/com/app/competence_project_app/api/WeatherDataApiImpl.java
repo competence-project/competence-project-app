@@ -36,7 +36,7 @@ public class WeatherDataApiImpl {
         return weatherDataApiImpl;
     }
 
-    public void getAllWeatherDataByMacAddress(long macAddress, WeatherDataApiCallback<WeatherDataAllResponseDto> callback) {
+    public void getAllWeatherDataByMacAddress(String macAddress, WeatherDataApiCallback<WeatherDataAllResponseDto> callback) {
         weatherDataApi.getAllWeatherDataByMacAddress(macAddress).enqueue(new Callback<List<WeatherDataAllResponseDto>>() {
             @Override
             public void onResponse(@NonNull Call<List<WeatherDataAllResponseDto>> call, @NonNull Response<List<WeatherDataAllResponseDto>> response) {

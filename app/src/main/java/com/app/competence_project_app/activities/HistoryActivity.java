@@ -1,5 +1,8 @@
 package com.app.competence_project_app.activities;
 
+import android.os.Build;
+import android.os.Bundle;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,9 +11,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.app.competence_project_app.R;
 import com.app.competence_project_app.adapter.ChartSliderAdapter;
-
-import android.os.Build;
-import android.os.Bundle;
+import com.app.competence_project_app.util.constant.Constant;
 
 public class HistoryActivity extends AppCompatActivity {
 
@@ -26,14 +27,16 @@ public class HistoryActivity extends AppCompatActivity {
         }
 
         int currentItem = 0;
+        String macAddress = "";
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             currentItem = extras.getInt("slidePage");
+            macAddress = extras.getString(Constant.MAC_ADDRESS);
         }
 
         ViewPager2 viewPager = findViewById(R.id.pager);
         Integer numOfPages = 4;
-        FragmentStateAdapter pagerAdapter = new ChartSliderAdapter(this, numOfPages);
+        FragmentStateAdapter pagerAdapter = new ChartSliderAdapter(this, numOfPages, macAddress);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setFocusedByDefault(false);
         viewPager.setCurrentItem(currentItem);

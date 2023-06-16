@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.app.competence_project_app.activities.ConnectedActivity;
-import com.app.competence_project_app.model.Sensor;
 import com.app.competence_project_app.model.SensorStore;
+import com.app.competence_project_app.util.constant.Constant;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,7 +43,7 @@ public class SensorsListActivity extends AppCompatActivity {
             @Override
             public void click(int index) {
                 Intent intent = new Intent(SensorsListActivity.this, ConnectedActivity.class);
-                intent.putExtra("macAddress", sensors.get(index).getMacAddress());
+                intent.putExtra(Constant.MAC_ADDRESS, sensors.get(index).getMacAddress());
                 startActivity(intent);
             }
         };
