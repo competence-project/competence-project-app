@@ -93,7 +93,7 @@ public class AddSensorActivity extends AppCompatActivity {
             return;
         }
 
-        this.sensors = Arrays.asList(sensors);
+        this.sensors = new ArrayList<>(Arrays.asList(sensors));
     }
 
     private void saveData() {
