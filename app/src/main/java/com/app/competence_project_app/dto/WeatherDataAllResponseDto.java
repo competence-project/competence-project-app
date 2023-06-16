@@ -14,13 +14,25 @@ public class WeatherDataAllResponseDto {
 
     private Sensor sensor;
 
-    @SerializedName("data")
-    List<Data> dataList;
+    @SerializedName("temp")
+    List<Data> temperatureDataList;
 
-    public WeatherDataAllResponseDto(RequestDateTime requestDateTime, Sensor sensor, List<Data> dataList) {
+    @SerializedName("illum")
+    List<Data> luminanceDataList;
+
+    @SerializedName("pssr")
+    List<Data> pressureDataList;
+
+    @SerializedName("hum")
+    List<Data> humidityDataList;
+
+    public WeatherDataAllResponseDto(RequestDateTime requestDateTime, Sensor sensor, List<Data> temperatureDataList, List<Data> luminanceDataList, List<Data> pressureDataList, List<Data> humidityDataList) {
         this.requestDateTime = requestDateTime;
         this.sensor = sensor;
-        this.dataList = dataList;
+        this.temperatureDataList = temperatureDataList;
+        this.luminanceDataList = luminanceDataList;
+        this.pressureDataList = pressureDataList;
+        this.humidityDataList = humidityDataList;
     }
 
     public RequestDateTime getRequestDateTime() {
@@ -39,11 +51,35 @@ public class WeatherDataAllResponseDto {
         this.sensor = sensor;
     }
 
-    public List<Data> getDataList() {
-        return dataList;
+    public List<Data> getTemperatureDataList() {
+        return temperatureDataList;
     }
 
-    public void setDataList(List<Data> dataList) {
-        this.dataList = dataList;
+    public void setTemperatureDataList(List<Data> temperatureDataList) {
+        this.temperatureDataList = temperatureDataList;
+    }
+
+    public List<Data> getLuminanceDataList() {
+        return luminanceDataList;
+    }
+
+    public void setLuminanceDataList(List<Data> luminanceDataList) {
+        this.luminanceDataList = luminanceDataList;
+    }
+
+    public List<Data> getPressureDataList() {
+        return pressureDataList;
+    }
+
+    public void setPressureDataList(List<Data> pressureDataList) {
+        this.pressureDataList = pressureDataList;
+    }
+
+    public List<Data> getHumidityDataList() {
+        return humidityDataList;
+    }
+
+    public void setHumidityDataList(List<Data> humidityDataList) {
+        this.humidityDataList = humidityDataList;
     }
 }
