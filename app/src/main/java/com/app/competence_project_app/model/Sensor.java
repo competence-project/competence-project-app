@@ -7,11 +7,8 @@ public class Sensor {
     @SerializedName("mac_address")
     private String macAddress;
 
-    private String localization;
-
-    public Sensor(String macAddress, String localization) {
+    public Sensor(String macAddress) {
         this.macAddress = macAddress;
-        this.localization = localization;
     }
 
     public String getMacAddress() {
@@ -20,13 +17,5 @@ public class Sensor {
 
     public void setMacAddress(String macAddress) {
         this.macAddress = macAddress;
-    }
-
-    public String getLocalization() {
-        return localization;
-    }
-
-    public void setLocalization(String localization) {
-        this.localization = localization;
     }
 }

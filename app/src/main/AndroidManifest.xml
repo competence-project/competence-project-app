@@ -22,20 +22,21 @@
             android:theme="@style/Theme.Competenceprojectapp.NoActionBar" />
         <activity
             android:name=".SensorsListActivity"
-            android:exported="false"
-            android:label="@string/title_activity_sensors_list"
-            android:theme="@style/Theme.Competenceprojectapp.NoActionBar" />
-        <activity
-            android:name=".HistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".StartActivity"
+            android:name=".activities.HistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".ConnectedActivity"
+            android:name=".activities.StartActivity"
             android:exported="false" />
         <activity
-            android:name=".MenuActivity"
+            android:name=".activities.ConnectedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.RealTimeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.MenuActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

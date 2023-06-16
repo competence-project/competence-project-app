@@ -85,15 +85,12 @@ public class AddSensorActivity extends AppCompatActivity {
 
     private void restoreSavedData() {
         SensorStore[] sensors = (SensorStore[]) SharedPrefUtility.getDataByName("sensors", SensorStore[].class, this.getApplicationContext());
-        if (sensors == null) {
+        if (sensors == null || sensors.length < 1) {
             this.sensors = new ArrayList<>();
             return;
         }
 
-        List<SensorStore> savedSensors = Arrays.asList(sensors);
-        if (savedSensors != null) {
-            this.sensors = savedSensors;
-        }
+        this.sensors = Arrays.asList(sensors);
     }
 
     private void saveData() {

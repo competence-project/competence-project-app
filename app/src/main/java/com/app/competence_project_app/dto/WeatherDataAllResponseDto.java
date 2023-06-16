@@ -9,7 +9,7 @@ import java.util.List;
 
 public class WeatherDataAllResponseDto {
 
-    @SerializedName("request_datetime")
+    @SerializedName("datetime")
     private RequestDateTime requestDateTime;
 
     private Sensor sensor;

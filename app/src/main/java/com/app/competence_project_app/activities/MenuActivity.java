@@ -1,4 +1,4 @@
-package com.app.competence_project_app;
+package com.app.competence_project_app.activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
+import com.app.competence_project_app.R;
 
 public class MenuActivity extends AppCompatActivity {
 

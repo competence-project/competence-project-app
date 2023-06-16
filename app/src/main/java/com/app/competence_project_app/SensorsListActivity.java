@@ -1,5 +1,6 @@
 package com.app.competence_project_app;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.app.competence_project_app.activities.ConnectedActivity;
 import com.app.competence_project_app.model.Sensor;
 import com.app.competence_project_app.model.SensorStore;
 
@@ -28,6 +30,11 @@ public class SensorsListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensors_list);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
 
         recyclerView = findViewById(R.id.recyclerViewSensors);
         recyclerView.setHasFixedSize(true);

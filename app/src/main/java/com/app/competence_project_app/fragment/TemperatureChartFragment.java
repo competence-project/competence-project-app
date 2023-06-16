@@ -11,13 +11,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.app.competence_project_app.R;
 import com.app.competence_project_app.api.WeatherDataApiCallback;
 import com.app.competence_project_app.api.WeatherDataApiImpl;
 import com.app.competence_project_app.dto.WeatherDataAllResponseDto;
 import com.app.competence_project_app.model.Data;
+import com.app.competence_project_app.util.constant.Constant;
 import com.app.competence_project_app.util.formatter.PointLabelValueFormatter;
 import com.app.competence_project_app.util.formatter.XLabelValueFormatter;
 import com.github.mikephil.charting.charts.LineChart;
@@ -29,14 +29,8 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.android.material.textview.MaterialTextView;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 /**
@@ -45,6 +39,8 @@ import java.util.stream.Collectors;
  * create an instance of this fragment.
  */
 public class TemperatureChartFragment extends Fragment {
+
+    private long macAddress;
 
     private int pageNumber;
 
@@ -62,7 +58,7 @@ public class TemperatureChartFragment extends Fragment {
     public static TemperatureChartFragment newInstance(Integer pageNumber) {
         TemperatureChartFragment fragment = new TemperatureChartFragment();
         Bundle args = new Bundle();
-        args.putInt("pageNumber", pageNumber);
+        args.putInt(Constant.PAGE_NUMBER, pageNumber);
         fragment.setArguments(args);
         return fragment;
     }
@@ -71,7 +67,7 @@ public class TemperatureChartFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            pageNumber = getArguments().getInt("pageNumber");
+            pageNumber = getArguments().getInt(Constant.PAGE_NUMBER);
         }
     }
 
@@ -82,6 +78,7 @@ public class TemperatureChartFragment extends Fragment {
 
         lineChart = view.findViewById(R.id.chart);
         chartTitle = view.findViewById(R.id.chart_title);
+        macAddress = 1;
 
         return view;
     }
@@ -139,20 +136,15 @@ public class TemperatureChartFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void onWeatherDataResponse() {
-        LocalDateTime from = LocalDateTime.parse("2023-04-11T12:43:21");
-        LocalDateTime to = LocalDateTime.parse("2023-04-15T12:43:21");
-        long sensorId = 1;
-
-        WeatherDataApiImpl.getInstance().getAllWeatherData(sensorId, from, to, new WeatherDataApiCallback<WeatherDataAllResponseDto>() {
+        WeatherDataApiImpl.getInstance().getAllWeatherDataByMacAddress(macAddress, new WeatherDataApiCallback<WeatherDataAllResponseDto>() {
             @Override
             public void onSuccess(WeatherDataAllResponseDto body) {
                 Data data = body.getDataList().get(pageNumber);
-                unit = data.getUnit();
-                String name = data.getName().toLowerCase();
-                chartTitle.setText(name.substring(0, 1).toUpperCase() + name.substring(1));
+                unit = getUnitByDataName(body.getDataList().get(pageNumber).getName());
+                chartTitle.setText(getTitleByDataName(body.getDataList().get(pageNumber).getName()));
                 entries = data.getMeasurementList()
                         .stream()
-                        .map(measurement -> new Entry(getTimeInMillis(measurement.getDatetime()), measurement.getResult()))
+                        .map(measurement -> new Entry(measurement.getDatetime() * 1000, Float.parseFloat(measurement.getResult())))
                         .collect(Collectors.toList());
 
                 lineChart.getDescription().setEnabled(false);
@@ -162,29 +154,41 @@ public class TemperatureChartFragment extends Fragment {
 
                 setData();
 
-                Log.i("WEATHER DATA ALL: ", body.toString());
+                Log.i(Constant.SUCCESS_WEATHER_DATA_ALL, body.toString());
             }
 
             @Override
             public void onFailure(Exception e) {
-                Log.i("WEATHER DATA ALL NOT FOUND: ", e.getMessage());
+                Log.i(Constant.FAILURE_WEATHER_DATA_ALL, e.getMessage());
             }
         });
     }
 
-    private long getTimeInMillis(String timestamp) {
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
-            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-            Date date = sdf.parse(timestamp);
-            if (date == null) {
-                return 0;
-            }
+    private String getUnitByDataName(String name) {
+        if (Constant.TEMP.equals(name)) {
+            return Constant.TEMP_UNIT;
+        } else if (Constant.HUM.equals(name)) {
+            return Constant.HUM_UNIT;
+        } else if (Constant.PSSR.equals(name)) {
+            return Constant.PSSR_UNIT;
+        } else if (Constant.ILLUM.equals(name)) {
+            return Constant.ILLUM_UNIT;
+        } else {
+            return Constant.BLANK;
+        }
+    }
 
-            return date.getTime();
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return 0;
+    private String getTitleByDataName(String name) {
+        if (Constant.TEMP.equals(name)) {
+            return Constant.TEMP_LABEL;
+        } else if (Constant.HUM.equals(name)) {
+            return Constant.HUM_LABEL;
+        } else if (Constant.PSSR.equals(name)) {
+            return Constant.PSSR_LABEL;
+        } else if (Constant.ILLUM.equals(name)) {
+            return Constant.ILLUM_LABEL;
+        } else {
+            return Constant.BLANK;
         }
     }
 }
