@@ -139,9 +139,9 @@ public class TemperatureChartFragment extends Fragment {
         WeatherDataApiImpl.getInstance().getAllWeatherDataByMacAddress(macAddress, new WeatherDataApiCallback<WeatherDataAllResponseDto>() {
             @Override
             public void onSuccess(WeatherDataAllResponseDto body) {
-                Data data = body.getDataList().get(pageNumber);
-                unit = getUnitByDataName(body.getDataList().get(pageNumber).getName());
-                chartTitle.setText(getTitleByDataName(body.getDataList().get(pageNumber).getName()));
+                Data data = body.getTemperatureDataList().get(0);
+                unit = getUnitByDataName(Constant.TEMP);
+                chartTitle.setText(getTitleByDataName(Constant.TEMP));
                 entries = data.getMeasurementList()
                         .stream()
                         .map(measurement -> new Entry(measurement.getDatetime() * 1000, Float.parseFloat(measurement.getResult())))
