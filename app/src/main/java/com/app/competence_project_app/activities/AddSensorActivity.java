@@ -1,9 +1,8 @@
-package com.app.competence_project_app;
+package com.app.competence_project_app.activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -12,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.app.competence_project_app.R;
+import com.app.competence_project_app.SharedPrefUtility;
 import com.app.competence_project_app.model.SensorStore;
 import com.hivemq.client.mqtt.datatypes.MqttQos;
 import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient;

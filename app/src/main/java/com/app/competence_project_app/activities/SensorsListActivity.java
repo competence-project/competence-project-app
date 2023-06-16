@@ -1,4 +1,4 @@
-package com.app.competence_project_app;
+package com.app.competence_project_app.activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.app.competence_project_app.activities.ConnectedActivity;
-import com.app.competence_project_app.model.Sensor;
+import com.app.competence_project_app.ClickListener;
+import com.app.competence_project_app.R;
+import com.app.competence_project_app.SensorsAdapter;
+import com.app.competence_project_app.SharedPrefUtility;
 import com.app.competence_project_app.model.SensorStore;
 
 import java.util.ArrayList;
