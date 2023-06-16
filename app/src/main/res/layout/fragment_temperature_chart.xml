@@ -1,73 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".fragment.TemperatureChartFragment">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/chart_title"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/data_container"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight=".2"
+        android:orientation="horizontal"
         android:gravity="center"
-        android:text=""
-        android:textColor="@color/white"
-        android:textSize="30sp" />
+        app:layout_constraintVertical_weight="1.5"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintEnd_toStartOf="@id/guideline2"
+        app:layout_constraintBottom_toTopOf="@id/chart"
+        app:layout_constraintTop_toBottomOf="@id/guideline4">
 
+        <LinearLayout
+            android:id="@+id/type_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:src="@drawable/baseline_bar_chart_24_white"
+                android:layout_gravity="center" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/chart_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Weekly"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/result_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+
+            <ImageView
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:src="@drawable/baseline_timeline_24"
+                android:layout_gravity="center" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/selected_entry_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/time_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:src="@drawable/baseline_access_time_24"
+                android:layout_gravity="center" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/selected_entry_datetime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+    </LinearLayout>
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight=".6" />
+        app:layout_constraintVertical_weight="9"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintEnd_toStartOf="@id/guideline2"
+        app:layout_constraintBottom_toTopOf="@id/button_container"
+        app:layout_constraintTop_toBottomOf="@id/data_container" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/button_container"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight=".2"
         android:gravity="center"
-        android:orientation="horizontal">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_daily"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="4sp"
-            android:paddingBottom="4sp"
-            android:textSize="13sp"
-            android:textColor="@color/brown_400"
-            android:backgroundTint="#FFFFFF"
-            android:text="Weekly"
-            app:backgroundTint="@color/white"
-            app:cornerRadius="25dp"
-            app:rippleColor="@color/brown_50"
-            app:strokeColor="@color/brown_400"
-            app:strokeWidth="1.5dp"
-            android:padding="10sp" />
-
-        <android.widget.Space
-            android:layout_width="20sp"
-            android:layout_height="wrap_content" />
+        android:orientation="horizontal"
+        app:layout_constraintVertical_weight="1.5"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintEnd_toStartOf="@id/guideline2"
+        app:layout_constraintBottom_toTopOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@id/chart">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_weekly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:padding="10sp"
             android:paddingTop="4sp"
             android:paddingBottom="4sp"
-            android:textSize="13sp"
+            android:text="Weekly"
             android:textColor="@color/brown_400"
-            android:backgroundTint="#FFFFFF"
-            android:text="Monthly"
+            android:textSize="11sp"
             app:backgroundTint="@color/white"
             app:cornerRadius="25dp"
             app:rippleColor="@color/brown_50"
             app:strokeColor="@color/brown_400"
-            app:strokeWidth="1.5dp"
-            android:padding="10sp" />
+            app:strokeWidth="1.5dp" />
 
         <android.widget.Space
             android:layout_width="20sp"
@@ -77,18 +143,67 @@
             android:id="@+id/btn_monthly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:padding="10sp"
             android:paddingTop="4sp"
             android:paddingBottom="4sp"
-            android:textSize="13sp"
+            android:text="Monthly"
             android:textColor="@color/brown_400"
-            android:backgroundTint="#FFFFFF"
-            android:text="Yearly"
+            android:textSize="11sp"
             app:backgroundTint="@color/white"
             app:cornerRadius="25dp"
             app:rippleColor="@color/brown_50"
             app:strokeColor="@color/brown_400"
-            app:strokeWidth="1.5dp"
-            android:padding="10sp" />
+            app:strokeWidth="1.5dp" />
+
+        <android.widget.Space
+            android:layout_width="20sp"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_yearly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:padding="10sp"
+            android:paddingTop="4sp"
+            android:paddingBottom="4sp"
+            android:text="Yearly"
+            android:textColor="@color/brown_400"
+            android:textSize="11sp"
+            app:backgroundTint="@color/white"
+            app:cornerRadius="25dp"
+            app:rippleColor="@color/brown_50"
+            app:strokeColor="@color/brown_400"
+            app:strokeWidth="1.5dp" />
     </LinearLayout>
 
-</LinearLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.97" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.03" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

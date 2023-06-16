@@ -10,6 +10,6 @@ import retrofit2.http.Path;
 
 public interface WeatherDataApi {
 
-    @GET("/data/{mac_addr}")
-    Call<List<WeatherDataAllResponseDto>> getAllWeatherDataByMacAddress(@Path("mac_addr") long macAddress);
+    @GET("/data/mac/{mac_addr}")
+    Call<List<WeatherDataAllResponseDto>> getAllWeatherDataByMacAddress(@Path("mac_addr") String macAddress);
 }
