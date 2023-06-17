@@ -19,7 +19,6 @@ import java.util.Objects;
 public class ConnectedActivity extends AppCompatActivity {
 
     private Mqtt3AsyncClient client;
-    private TextView cmd;
     private TextInputEditText topic;
 
     private String macAddress;
@@ -39,11 +38,9 @@ public class ConnectedActivity extends AppCompatActivity {
         }
 
         client = StartActivity.getClient();
-        cmd = findViewById(R.id.edittext_result);
         topic = findViewById(R.id.edittext_topic);
 
         onButtonRealTimeEventListener();
-//        onClickSubscribe();
         onClickPublish();
         onClickDisconnect();
         onClickHistory();
@@ -58,52 +55,6 @@ public class ConnectedActivity extends AppCompatActivity {
         });
     }
 
-//    private void onClickSubscribe() {
-//        Button button = findViewById(R.id.outlinedButtonSubscribe);
-//        button.setOnClickListener(view -> {
-////            String tpc = Objects.requireNonNull(topic.getText()).toString();
-//            String tpc = "dev/#";
-//            client.subscribeWith()
-//                    .topicFilter(tpc)
-//                    .qos(MqttQos.AT_LEAST_ONCE)
-//                    .callback(response -> {
-//                        if(RealTimeActivity.active) {
-//                            StringBuilder data = new StringBuilder();
-//                            byte[] tab = response.getPayloadAsBytes();
-//                            for (byte b : tab) {
-//                                data.append((char) b);
-//                            }
-////                            model.setPayload(new RealTimeViewModel.Payload(
-////                                    String.valueOf(data),
-////                                    String.valueOf(response.getTopic())
-////                            ));
-//                            StringContainer stringContainer = (StringContainer) getApplicationContext();
-//                            stringContainer.setTopicData(String.valueOf(response.getTopic()), String.valueOf(data));
-//                            System.out.println(response);
-//                        } else {
-//                            System.out.println("Przyjeto jakies dane, ale activity jest wylaczone");
-//                        }
-//                    })
-//                    .send()
-//                    .whenComplete((subAck, throwable) -> {
-//                        if (throwable != null) {
-////                                System.out.println("PORAŻKA");
-////                                cmd.append("failure - subscribe on topic: " + topic.getText().toString() + "\n");
-//                            Executors.newSingleThreadExecutor().execute(() -> {
-//                                Toast.makeText(getApplicationContext(), "failure", Toast.LENGTH_SHORT).show();
-//                            });
-//                        } else {
-////                                System.out.println("SUKCES");
-////                                cmd.append("success - subscribe on topic: " + topic.getText().toString() + "\n");
-////                                Executors.newSingleThreadExecutor().execute(() -> {Toast.makeText(this,"success",Toast.LENGTH_SHORT).show();});
-////                            Intent intent = new Intent(ConnectedActivity.this, RealTimeActivity.class);
-////                            startActivity(intent);
-//                        }
-//                    });
-//            }
-//        );
-//    }
-
     private void onClickPublish() {
         Button button = findViewById(R.id.outlinedButtonPublish);
         button.setOnClickListener(view ->
@@ -114,9 +65,9 @@ public class ConnectedActivity extends AppCompatActivity {
                         .send()
                         .whenComplete((mqtt3Publish, throwable1) -> {
                             if (throwable1 != null) {
-                                cmd.append("failure - publish on topic: " + topic.getText().toString() + "\n");
+                                System.out.println("failure - publish on topic: " + topic.getText().toString() + "\n");
                             } else {
-                                cmd.append("success - publish on topic: " + topic.getText().toString() + "\n");
+                                System.out.println("success - publish on topic: " + topic.getText().toString() + "\n");
                             }
                         })
         );
@@ -126,7 +77,7 @@ public class ConnectedActivity extends AppCompatActivity {
         ImageView imageViewButton = findViewById(R.id.outlinedButtonDisconnect);
         imageViewButton.setOnClickListener(view -> {
             client.disconnect();
-            cmd.append("disconnected\n");
+            System.out.println("disconnected\n");
             Intent intent = new Intent(ConnectedActivity.this, StartActivity.class);
             startActivity(intent);
         });

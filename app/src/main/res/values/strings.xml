@@ -12,6 +12,7 @@
     <string name="app_username">username</string>
     <string name="app_password">password</string>
     <string name="app_topic">topic</string>
+    <string name="app_message">message</string>
     <string name="app_subscribe">subscribe</string>
     <string name="app_delete">delete</string>
     <string name="app_publish">publish</string>
