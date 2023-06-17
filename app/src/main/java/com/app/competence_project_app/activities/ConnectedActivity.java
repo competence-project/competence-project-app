@@ -20,7 +20,7 @@ public class ConnectedActivity extends AppCompatActivity {
 
     private Mqtt3AsyncClient client;
     private TextInputEditText topic;
-
+    private TextInputEditText message;
     private String macAddress;
 
     @Override
@@ -39,11 +39,13 @@ public class ConnectedActivity extends AppCompatActivity {
 
         client = StartActivity.getClient();
         topic = findViewById(R.id.edittext_topic);
+        message = findViewById(R.id.edittext_message);
 
         onButtonRealTimeEventListener();
         onClickPublish();
         onClickDisconnect();
         onClickHistory();
+        onClickDelete();
     }
 
     private void onButtonRealTimeEventListener() {
@@ -57,20 +59,24 @@ public class ConnectedActivity extends AppCompatActivity {
 
     private void onClickPublish() {
         Button button = findViewById(R.id.outlinedButtonPublish);
-        button.setOnClickListener(view ->
+        button.setOnClickListener(view -> {
+            String msg = String.valueOf(message.getText());
+            String tpc = String.valueOf(topic.getText());
+            if(msg.length() != 0 && tpc.length() != 0) {
                 client.publishWith()
-                        .topic(Objects.requireNonNull(topic.getText()).toString())
-                        .payload("1".getBytes())
+                        .topic(tpc)
+                        .payload(msg.getBytes())
                         .qos(MqttQos.EXACTLY_ONCE)
                         .send()
                         .whenComplete((mqtt3Publish, throwable1) -> {
                             if (throwable1 != null) {
-                                System.out.println("failure - publish on topic: " + topic.getText().toString() + "\n");
+                                System.out.println("failure - publish on topic: " + tpc + "\n");
                             } else {
-                                System.out.println("success - publish on topic: " + topic.getText().toString() + "\n");
+                                System.out.println("success - publish on topic: " + tpc + "\n");
                             }
-                        })
-        );
+                        });
+            }
+        });
     }
 
     private void onClickDisconnect() {
@@ -89,5 +95,13 @@ public class ConnectedActivity extends AppCompatActivity {
         button.setOnClickListener(view -> {
             startActivity(intent);
         });
+    }
+
+    private void onClickDelete() {
+        Button button = findViewById(R.id.outlinedButtonDelete);
+        button.setOnClickListener(view -> {
+                    //todo remove sensor
+                }
+        );
     }
 }

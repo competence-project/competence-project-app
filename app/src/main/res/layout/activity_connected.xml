@@ -78,7 +78,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/outlinedButtonSubscribe"
+                android:id="@+id/outlinedButtonDelete"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
