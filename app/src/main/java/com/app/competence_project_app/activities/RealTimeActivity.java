@@ -12,6 +12,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.app.competence_project_app.R;
+import com.app.competence_project_app.SensorsListActivity;
 import com.hivemq.client.internal.mqtt.message.unsubscribe.MqttUnsubscribe;
 import com.hivemq.client.internal.util.collections.ImmutableList;
 import com.hivemq.client.mqtt.datatypes.MqttQos;
@@ -19,18 +20,23 @@ import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient;
 import com.hivemq.client.mqtt.mqtt3.message.unsubscribe.Mqtt3Unsubscribe;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executors;
 
 public class RealTimeActivity extends AppCompatActivity {
 
     private Mqtt3AsyncClient client;
-    private String topic = "dev/#";
+    private String topic;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_real_time);
+
+        Intent intent = getIntent();
+        topic = "dev/" + intent.getStringExtra("macAddress");
+        System.out.println(topic);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -47,13 +53,14 @@ public class RealTimeActivity extends AppCompatActivity {
 
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        Mqtt3Unsubscribe unsubscribe = Mqtt3Unsubscribe.builder()
-//                .topicFilter(topic)
-//                .build();
-//        client.unsubscribe(unsubscribe);
-//    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        CompletableFuture<Void> res = client.unsubscribeWith()
+                .topicFilter(topic)
+                .send();
+        System.out.println(res.isDone());
+    }
 
     private void onClickMoveToHistoryActivity(int buttonID, int slidePage) {
         Intent intent = new Intent(RealTimeActivity.this, HistoryActivity.class);

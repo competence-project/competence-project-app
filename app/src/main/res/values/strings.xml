@@ -13,6 +13,7 @@
     <string name="app_password">password</string>
     <string name="app_topic">topic</string>
     <string name="app_subscribe">subscribe</string>
+    <string name="app_delete">delete</string>
     <string name="app_publish">publish</string>
     <string name="app_disconnect">disconnect</string>
     <string name="app_history">History</string>

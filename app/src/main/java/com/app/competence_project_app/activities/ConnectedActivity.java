@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +15,6 @@ import com.hivemq.client.mqtt.datatypes.MqttQos;
 import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient;
 
 import java.util.Objects;
-import java.util.concurrent.Executors;
 
 public class ConnectedActivity extends AppCompatActivity {
 
@@ -33,7 +31,7 @@ public class ConnectedActivity extends AppCompatActivity {
         Intent intent = getIntent();
         macAddress = intent.getStringExtra("macAddress");
 
-        setContentView(R.layout.activity_sub_pub);
+        setContentView(R.layout.activity_connected);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -53,6 +51,7 @@ public class ConnectedActivity extends AppCompatActivity {
 
     private void onButtonRealTimeEventListener() {
         Intent intent = new Intent(ConnectedActivity.this, RealTimeActivity.class);
+        intent.putExtra("macAddress", macAddress);
         Button button = findViewById(R.id.outlinedButtonRealTime);
         button.setOnClickListener(view -> {
             startActivity(intent);
