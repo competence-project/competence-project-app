@@ -28,7 +28,7 @@ public class AddSensorActivity extends AppCompatActivity {
     private Mqtt3AsyncClient client;
 
     EditText macEditText;
-    EditText nameEditText;
+    EditText nameEditText;  // name is used only to save sensor on client-side with user-friendly name instead of MAC address
 
     private String topic = "";
 

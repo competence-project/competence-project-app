@@ -1,48 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    android:background="@color/brown_200"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/brown_200"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:weightSum="10"
+    android:gravity="center"
     tools:context=".activities.AddSensorActivity"
+
     >
 
-
-
-    <TextView
-        android:id="@+id/sensorAddTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="Add sensor"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="25dp" />
-
-
-    <EditText
-        android:id="@+id/sensor_mac"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:hint="MAC addres"
-        android:inputType="text"/>
-
-    <EditText
-        android:id="@+id/sensor_name"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:hint="Name"
-        android:inputType="text"/>
-
-    <Button
-        android:id="@+id/addSensorButton"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:text="Add"
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="8"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:weightSum="10"
         >
-    </Button>
 
-</TableLayout>
+
+        <TableLayout
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="8"
+            >
+
+
+
+            <TextView
+                android:id="@+id/sensorAddTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Add sensor"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="25dp" />
+
+
+            <EditText
+                android:id="@+id/sensor_mac"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:hint="MAC addres"
+                android:inputType="text"/>
+
+            <EditText
+                android:id="@+id/sensor_name"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:hint="Name"
+                android:inputType="text"/>
+
+            <Button
+                android:id="@+id/addSensorButton"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:text="Add"
+                >
+            </Button>
+
+        </TableLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
