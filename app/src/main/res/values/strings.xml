@@ -31,4 +31,6 @@
     <string name="mac_address">MAC address</string>
     <string name="name">name</string>
     <string name="app_add">add</string>
+    <string name="tableHeadingName">name</string>
+    <string name="tableHeadingMAC">MAC</string>
 </resources>
