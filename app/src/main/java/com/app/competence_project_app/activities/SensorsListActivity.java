@@ -27,7 +27,7 @@ public class SensorsListActivity extends AppCompatActivity {
 
     ClickListener listener;
 
-    List<SensorStore> sensors = new ArrayList<>();
+    ArrayList<SensorStore> sensors = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,10 +85,7 @@ public class SensorsListActivity extends AppCompatActivity {
             return;
         }
 
-        List<SensorStore> savedSensors = Arrays.asList(sensors);
-        if (savedSensors != null) {
-            this.sensors = savedSensors;
-        }
+        this.sensors = new ArrayList<>(Arrays.asList(sensors));
     }
 
     private void saveData() {
