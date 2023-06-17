@@ -43,7 +43,7 @@ public class AddSensorActivity extends AppCompatActivity {
 
         macEditText = findViewById(R.id.sensor_mac);
         nameEditText = findViewById(R.id.sensor_name);
-        addSensorButton = findViewById(R.id.addSensorButton);
+        addSensorButton = findViewById(R.id.outlinedButtonAdd);
         addSensorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
