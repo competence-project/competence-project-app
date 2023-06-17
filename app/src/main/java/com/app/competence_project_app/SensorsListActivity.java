@@ -59,7 +59,7 @@ public class SensorsListActivity extends AppCompatActivity {
     }
 
     public void goToAddSensor(View view) {
-        Intent intent = new Intent(view.getContext(),  AddSensorActivity.class);
+        Intent intent = new Intent(view.getContext(), AddSensorActivity.class);
         startActivity(intent);
     }
 
