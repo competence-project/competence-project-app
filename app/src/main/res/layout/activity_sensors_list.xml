@@ -35,12 +35,14 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toTopOf="@+id/guideline5">
+        app:layout_constraintTop_toTopOf="@+id/guideline5"
+        android:padding="10dp">
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_margin="5dp">
 
             <TextView
                 android:id="@+id/tableHeadingName"
