@@ -17,6 +17,7 @@ import com.app.competence_project_app.R;
 import com.app.competence_project_app.SensorsListActivity;
 import com.hivemq.client.internal.mqtt.lifecycle.MqttClientAutoReconnectImpl;
 import com.hivemq.client.mqtt.MqttClient;
+import com.hivemq.client.mqtt.MqttClientState;
 import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient;
 import com.hivemq.client.mqtt.mqtt3.exceptions.Mqtt3ConnAckException;
 
@@ -33,6 +34,7 @@ public class StartActivity extends AppCompatActivity {
         return client;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +54,7 @@ public class StartActivity extends AppCompatActivity {
     private void onButtonCleanEventListener() {
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void onButtonConnectEventListener() {
         Button button = findViewById(R.id.outlinedButtonConnect);
         button.setOnClickListener(view -> {
@@ -59,8 +62,17 @@ public class StartActivity extends AppCompatActivity {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void connectToBroker() {
         String text = ((EditText) findViewById(R.id.edittext_server_uri)).getText().toString();
+        if(text.length() == 0) {
+            new Handler(Looper.getMainLooper()).post(() -> {
+                Toast toast = Toast.makeText(getApplicationContext(), "blank uri", Toast.LENGTH_SHORT);
+                toast.show();
+            });
+            return;
+        }
+
         client = MqttClient.builder()
                 .useMqttVersion3()
                 .identifier(clientId)
@@ -93,14 +105,18 @@ public class StartActivity extends AppCompatActivity {
                     }
                 });
 
-        if(client.getState().isConnected()) {
-            Intent intent = new Intent(this, SensorsListActivity.class);
-            startActivity(intent);
-        } else {
-            new Handler(Looper.getMainLooper()).post(() -> {
-                Toast toast = Toast.makeText(getApplicationContext(), "failed to connect", Toast.LENGTH_SHORT);
-                toast.show();
-            });
+        while(true) {
+            if(client.getState() == MqttClientState.CONNECTED) {
+                Intent intent = new Intent(this, SensorsListActivity.class);
+                startActivity(intent);
+                break;
+            } else if(client.getState() == MqttClientState.DISCONNECTED) {
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    Toast toast = Toast.makeText(getApplicationContext(), "failed to connect", Toast.LENGTH_SHORT);
+                    toast.show();
+                });
+                break;
+            }
         }
     }
 }
