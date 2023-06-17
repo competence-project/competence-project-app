@@ -1,20 +1,28 @@
 package com.app.competence_project_app.activities;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.app.competence_project_app.R;
 import com.app.competence_project_app.SensorsListActivity;
+import com.hivemq.client.internal.mqtt.lifecycle.MqttClientAutoReconnectImpl;
 import com.hivemq.client.mqtt.MqttClient;
 import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient;
 import com.hivemq.client.mqtt.mqtt3.exceptions.Mqtt3ConnAckException;
 
+import java.time.LocalTime;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -53,7 +61,6 @@ public class StartActivity extends AppCompatActivity {
 
     private void connectToBroker() {
         String text = ((EditText) findViewById(R.id.edittext_server_uri)).getText().toString();
-        System.out.println(text);
         client = MqttClient.builder()
                 .useMqttVersion3()
                 .identifier(clientId)
@@ -86,8 +93,14 @@ public class StartActivity extends AppCompatActivity {
                     }
                 });
 
-
-        Intent intent = new Intent(this, SensorsListActivity.class);
-        startActivity(intent);
+        if(client.getState().isConnected()) {
+            Intent intent = new Intent(this, SensorsListActivity.class);
+            startActivity(intent);
+        } else {
+            new Handler(Looper.getMainLooper()).post(() -> {
+                Toast toast = Toast.makeText(getApplicationContext(), "failed to connect", Toast.LENGTH_SHORT);
+                toast.show();
+            });
+        }
     }
 }
