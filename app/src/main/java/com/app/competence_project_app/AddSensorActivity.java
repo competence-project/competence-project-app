@@ -68,7 +68,6 @@ public class AddSensorActivity extends AppCompatActivity {
 
                 // TODO: subscribe to check if MAC address is correct
 
-                //TODO: URGENT. WHY ADDING MORE THAN 1 SENSOR BREAKS THE APP????
                 sensors.add(new SensorStore(macAddress, name));
                 clearInputs();
 
@@ -96,7 +95,7 @@ public class AddSensorActivity extends AppCompatActivity {
             return;
         }
 
-        this.sensors = Arrays.asList(sensors);
+        new ArrayList<>(Arrays.asList(sensors));
     }
 
     private void saveData() {
