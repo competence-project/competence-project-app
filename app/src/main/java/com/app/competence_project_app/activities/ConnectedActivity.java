@@ -50,8 +50,15 @@ public class ConnectedActivity extends AppCompatActivity {
     }
 
     private void onButtonRealTimeEventListener() {
+        String serverUri = "";
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            serverUri = extras.getString(Constant.SERVER_URI);
+        }
+
         Intent intent = new Intent(ConnectedActivity.this, RealTimeActivity.class);
-        intent.putExtra("macAddress", macAddress);
+        intent.putExtra(Constant.SERVER_URI, serverUri);
+        intent.putExtra(Constant.MAC_ADDRESS, macAddress);
         Button button = findViewById(R.id.outlinedButtonRealTime);
         button.setOnClickListener(view -> {
             startActivity(intent);
@@ -91,7 +98,14 @@ public class ConnectedActivity extends AppCompatActivity {
     }
 
     private void onClickHistory() {
+        String serverUri = "";
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            serverUri = extras.getString(Constant.SERVER_URI);
+        }
+
         Intent intent = new Intent(ConnectedActivity.this, HistoryActivity.class);
+        intent.putExtra(Constant.SERVER_URI, serverUri);
         intent.putExtra(Constant.MAC_ADDRESS, macAddress);
         Button button = findViewById(R.id.outlinedButtonHistory);
         button.setOnClickListener(view -> {

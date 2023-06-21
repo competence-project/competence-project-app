@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.app.competence_project_app.R;
 import com.app.competence_project_app.SensorsListActivity;
+import com.app.competence_project_app.util.constant.Constant;
 import com.hivemq.client.internal.mqtt.lifecycle.MqttClientAutoReconnectImpl;
 import com.hivemq.client.mqtt.MqttClient;
 import com.hivemq.client.mqtt.MqttClientState;
@@ -64,8 +65,8 @@ public class StartActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void connectToBroker() {
-        String text = ((EditText) findViewById(R.id.edittext_server_uri)).getText().toString();
-        if(text.length() == 0) {
+        String serverUri = ((EditText) findViewById(R.id.edittext_server_uri)).getText().toString();
+        if(serverUri.length() == 0) {
             new Handler(Looper.getMainLooper()).post(() -> {
                 Toast toast = Toast.makeText(getApplicationContext(), "blank uri", Toast.LENGTH_SHORT);
                 toast.show();
@@ -84,7 +85,7 @@ public class StartActivity extends AppCompatActivity {
                         System.out.println("disconnect listener: MQTT connect failed because of {}" + cause.getMessage());
                     }
                 })
-                .serverHost(text)
+                .serverHost(serverUri)
                 .buildAsync();
 
         client.connectWith()
@@ -108,6 +109,7 @@ public class StartActivity extends AppCompatActivity {
         while(true) {
             if(client.getState() == MqttClientState.CONNECTED) {
                 Intent intent = new Intent(this, SensorsListActivity.class);
+                intent.putExtra(Constant.SERVER_URI, serverUri);
                 startActivity(intent);
                 break;
             } else if(client.getState() == MqttClientState.DISCONNECTED) {

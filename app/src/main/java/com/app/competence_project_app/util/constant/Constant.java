@@ -51,4 +51,8 @@ public class Constant {
     public static final String MONTHLY = "Monthly";
 
     public static final String YEARLY = "Yearly";
+
+    public static final String SERVER_URI = "serverUri";
+
+    public static final String SLIDE_PAGE = "slidePage";
 }

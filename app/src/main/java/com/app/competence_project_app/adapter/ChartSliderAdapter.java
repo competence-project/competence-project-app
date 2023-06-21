@@ -13,16 +13,19 @@ public class ChartSliderAdapter extends FragmentStateAdapter {
 
     private final String macAddress;
 
-    public ChartSliderAdapter(@NonNull FragmentActivity activity, Integer numOfPages, String macAddress) {
+    private final String serverUri;
+
+    public ChartSliderAdapter(@NonNull FragmentActivity activity, Integer numOfPages, String serverUri, String macAddress) {
         super(activity);
         this.numOfPages = numOfPages;
+        this.serverUri = serverUri;
         this.macAddress = macAddress;
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return TemperatureChartFragment.newInstance(position, macAddress);
+        return TemperatureChartFragment.newInstance(position, serverUri, macAddress);
     }
 
     @Override
