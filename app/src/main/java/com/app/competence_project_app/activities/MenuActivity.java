@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.app.competence_project_app.R;
+import com.app.competence_project_app.SensorsListActivity;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -26,7 +27,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void onButtonStartEventListener() {
-        Intent intent = new Intent(MenuActivity.this, StartActivity.class);
+        Intent intent = new Intent(MenuActivity.this, SensorsListActivity.class);
         Button button = findViewById(R.id.outlinedButtonStart);
         button.setOnClickListener(view -> startActivity(intent));
     }
