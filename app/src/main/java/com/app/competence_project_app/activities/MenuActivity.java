@@ -27,7 +27,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void onButtonStartEventListener() {
-        Intent intent = new Intent(MenuActivity.this, SensorsListActivity.class);
+        Intent intent = new Intent(MenuActivity.this, StartActivity.class);
         Button button = findViewById(R.id.outlinedButtonStart);
         button.setOnClickListener(view -> startActivity(intent));
     }
