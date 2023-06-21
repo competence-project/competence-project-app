@@ -66,7 +66,10 @@ public class AddSensorActivity extends AppCompatActivity {
                     return;
                 }
 
+                // TODO: subscribe to check if MAC address is correct
+
                 sensors.add(new SensorStore(macAddress, name));
+                Toast.makeText(AddSensorActivity.this, "Sensor added", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
