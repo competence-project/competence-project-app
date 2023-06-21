@@ -12,7 +12,9 @@
     <string name="app_username">username</string>
     <string name="app_password">password</string>
     <string name="app_topic">topic</string>
+    <string name="app_message">message</string>
     <string name="app_subscribe">subscribe</string>
+    <string name="app_delete">delete</string>
     <string name="app_publish">publish</string>
     <string name="app_disconnect">disconnect</string>
     <string name="app_history">History</string>
@@ -24,4 +26,11 @@
     <string name="luminance">LUMINANCE</string>
     <string name="pressure_value">-</string>
     <string name="pressure">PRESSURE</string>
+    <string name="sensors_title">Sensors</string>
+    <string name="add_sensor">Add sensor</string>
+    <string name="mac_address">MAC address</string>
+    <string name="name">name</string>
+    <string name="app_add">add</string>
+    <string name="tableHeadingName">name</string>
+    <string name="tableHeadingMAC">MAC</string>
 </resources>

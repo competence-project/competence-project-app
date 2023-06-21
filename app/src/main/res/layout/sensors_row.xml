@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/brown_400"
+    android:background="@drawable/table_shape"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="5dp"
+    android:layout_marginTop="10dp"
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
-    android:padding="5dp">
+    android:padding="10dp">
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/sensorName"
@@ -18,27 +20,23 @@
             android:layout_weight="1"
             android:width="0dp"
             android:layout_width="match_parent"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:textFontWeight="600"
-            android:layout_height="wrap_content" />
+            android:textColor="@color/brown_400"
+            android:textSize="20sp"
+            android:layout_height="wrap_content"
+            android:gravity="center" />
 
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
         <TextView
             android:id="@+id/sensorMAC"
             android:layout_gravity="start"
             android:layout_weight="1"
             android:width="0dp"
-            android:textSize="15dp"
-            android:textColor="@color/white"
             android:layout_width="match_parent"
+            android:textColor="@color/brown_400"
+            android:textSize="20sp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            />
+            android:gravity="center" />
+
     </TableRow>
+
 
 </TableLayout>
