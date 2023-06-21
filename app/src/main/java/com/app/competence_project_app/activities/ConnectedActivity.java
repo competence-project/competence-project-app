@@ -33,7 +33,7 @@ public class ConnectedActivity extends AppCompatActivity {
     private TextInputEditText message;
     private String macAddress;
 
-    ArrayList<SensorStore> sensors = new ArrayList<>();
+    List<SensorStore> sensors = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

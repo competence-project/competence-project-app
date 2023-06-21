@@ -25,7 +25,7 @@ public class SensorsListActivity extends AppCompatActivity {
 
     ClickListener listener;
 
-    ArrayList<SensorStore> sensors = new ArrayList<>();
+    List<SensorStore> sensors = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
