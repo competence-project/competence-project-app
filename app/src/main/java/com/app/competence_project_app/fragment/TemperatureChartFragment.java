@@ -270,7 +270,7 @@ public class TemperatureChartFragment extends Fragment {
     private List<Entry> toEntryListMapper(List<Measurement> measurementList) {
         return measurementList
                 .stream()
-                .map(measurement -> new Entry(measurement.getDatetime() * 1000, Float.parseFloat(measurement.getResult())))
+                .map(measurement -> new Entry(measurement.getDatetime() * 1000, Float.parseFloat(measurement.getResult().isEmpty() ? "0" : measurement.getResult())))
                 .collect(Collectors.toList());
     }
 
@@ -350,7 +350,7 @@ public class TemperatureChartFragment extends Fragment {
         for (Measurement measurement : measurementList) {
             long measurementTimeMillis = measurement.getDatetime() * 1000;
             if (measurementTimeMillis >= startInMillis && measurementTimeMillis < endInMillis) {
-                sum += Double.parseDouble(measurement.getResult());
+                sum += Double.parseDouble(measurement.getResult().isEmpty() ? "0" : measurement.getResult());
                 count++;
             }
         }
