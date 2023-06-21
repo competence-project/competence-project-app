@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.app.competence_project_app.R;
 import com.app.competence_project_app.SensorsListActivity;
+import com.app.competence_project_app.util.constant.Constant;
 import com.hivemq.client.internal.mqtt.message.unsubscribe.MqttUnsubscribe;
 import com.hivemq.client.internal.util.collections.ImmutableList;
 import com.hivemq.client.mqtt.datatypes.MqttQos;
@@ -63,8 +64,18 @@ public class RealTimeActivity extends AppCompatActivity {
     }
 
     private void onClickMoveToHistoryActivity(int buttonID, int slidePage) {
+        String serverUri = "";
+        String macAddress = "";
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            serverUri = extras.getString(Constant.SERVER_URI);
+            macAddress = extras.getString(Constant.MAC_ADDRESS);
+        }
+
         Intent intent = new Intent(RealTimeActivity.this, HistoryActivity.class);
-        intent.putExtra("slidePage", slidePage);
+        intent.putExtra(Constant.SLIDE_PAGE, slidePage);
+        intent.putExtra(Constant.SERVER_URI, serverUri);
+        intent.putExtra(Constant.MAC_ADDRESS, macAddress);
         Button button = findViewById(buttonID);
         button.setOnClickListener(view -> startActivity(intent));
     }

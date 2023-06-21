@@ -27,16 +27,18 @@ public class HistoryActivity extends AppCompatActivity {
         }
 
         int currentItem = 0;
+        String serverUri = "";
         String macAddress = "";
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            currentItem = extras.getInt("slidePage");
+            currentItem = extras.getInt(Constant.SLIDE_PAGE);
+            serverUri = extras.getString(Constant.SERVER_URI);
             macAddress = extras.getString(Constant.MAC_ADDRESS);
         }
 
         ViewPager2 viewPager = findViewById(R.id.pager);
         Integer numOfPages = 4;
-        FragmentStateAdapter pagerAdapter = new ChartSliderAdapter(this, numOfPages, macAddress);
+        FragmentStateAdapter pagerAdapter = new ChartSliderAdapter(this, numOfPages, serverUri, macAddress);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setFocusedByDefault(false);
         viewPager.setCurrentItem(currentItem);

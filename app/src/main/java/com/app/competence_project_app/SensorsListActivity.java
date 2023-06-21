@@ -42,7 +42,14 @@ public class SensorsListActivity extends AppCompatActivity {
         listener = new ClickListener() {
             @Override
             public void click(int index) {
+                String serverUri = "";
+                Bundle extras = getIntent().getExtras();
+                if (extras != null) {
+                    serverUri = extras.getString(Constant.SERVER_URI);
+                }
+
                 Intent intent = new Intent(SensorsListActivity.this, ConnectedActivity.class);
+                intent.putExtra(Constant.SERVER_URI, serverUri);
                 intent.putExtra(Constant.MAC_ADDRESS, sensors.get(index).getMacAddress());
                 startActivity(intent);
             }

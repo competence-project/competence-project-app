@@ -20,9 +20,11 @@ public class WeatherDataApiImpl {
 
     private static WeatherDataApi weatherDataApi;
 
+    private static String baseUrl = Constant.BASE_URL;
+
     private WeatherDataApiImpl() {
         weatherDataApi = new retrofit2.Retrofit.Builder()
-                .baseUrl(Constant.BASE_URL)
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(WeatherDataApi.class);
@@ -34,6 +36,12 @@ public class WeatherDataApiImpl {
         }
 
         return weatherDataApiImpl;
+    }
+
+    public static void updateBaseUrl(String newBaseUrl) {
+        if (!newBaseUrl.isEmpty()) {
+            baseUrl = newBaseUrl;
+        }
     }
 
     public void getAllWeatherDataByMacAddress(String macAddress, WeatherDataApiCallback<WeatherDataAllResponseDto> callback) {

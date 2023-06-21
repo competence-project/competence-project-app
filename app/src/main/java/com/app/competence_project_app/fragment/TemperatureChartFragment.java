@@ -74,13 +74,16 @@ public class TemperatureChartFragment extends Fragment {
 
     private Button btnYearly;
 
+    private String serverUri = "";
+
     public TemperatureChartFragment() {
     }
 
-    public static TemperatureChartFragment newInstance(Integer pageNumber, String macAddress) {
+    public static TemperatureChartFragment newInstance(Integer pageNumber, String serverUri, String macAddress) {
         TemperatureChartFragment fragment = new TemperatureChartFragment();
         Bundle args = new Bundle();
         args.putInt(Constant.PAGE_NUMBER, pageNumber);
+        args.putString(Constant.SERVER_URI, serverUri);
         args.putString(Constant.MAC_ADDRESS, macAddress);
         fragment.setArguments(args);
 
@@ -92,6 +95,7 @@ public class TemperatureChartFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             pageNumber = getArguments().getInt(Constant.PAGE_NUMBER);
+            serverUri = getArguments().getString(Constant.SERVER_URI);
             macAddress = getArguments().getString(Constant.MAC_ADDRESS);
         }
     }
@@ -191,6 +195,12 @@ public class TemperatureChartFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void onWeatherDataResponse() {
+        String baseUrl = "";
+        if (!serverUri.isEmpty()) {
+            baseUrl = "http://" + serverUri + ":8080";
+        }
+
+        WeatherDataApiImpl.updateBaseUrl(baseUrl);
         WeatherDataApiImpl.getInstance().getAllWeatherDataByMacAddress(macAddress, new WeatherDataApiCallback<WeatherDataAllResponseDto>() {
             @Override
             public void onSuccess(WeatherDataAllResponseDto body) {
@@ -270,7 +280,7 @@ public class TemperatureChartFragment extends Fragment {
     private List<Entry> toEntryListMapper(List<Measurement> measurementList) {
         return measurementList
                 .stream()
-                .map(measurement -> new Entry(measurement.getDatetime() * 1000, Float.parseFloat(measurement.getResult())))
+                .map(measurement -> new Entry(measurement.getDatetime() * 1000, Float.parseFloat(measurement.getResult().isEmpty() ? "0" : measurement.getResult())))
                 .collect(Collectors.toList());
     }
 
@@ -350,7 +360,7 @@ public class TemperatureChartFragment extends Fragment {
         for (Measurement measurement : measurementList) {
             long measurementTimeMillis = measurement.getDatetime() * 1000;
             if (measurementTimeMillis >= startInMillis && measurementTimeMillis < endInMillis) {
-                sum += Double.parseDouble(measurement.getResult());
+                sum += Double.parseDouble(measurement.getResult().isEmpty() ? "0" : measurement.getResult());
                 count++;
             }
         }
