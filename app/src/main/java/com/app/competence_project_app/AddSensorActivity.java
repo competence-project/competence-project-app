@@ -66,13 +66,8 @@ public class AddSensorActivity extends AppCompatActivity {
                     return;
                 }
 
-                // TODO: subscribe to check if MAC address is correct
-
                 sensors.add(new SensorStore(macAddress, name));
-                clearInputs();
-
-                Intent intent = new Intent(view.getContext(), SensorsListActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
     }
