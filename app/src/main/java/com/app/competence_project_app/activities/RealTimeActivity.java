@@ -36,7 +36,7 @@ public class RealTimeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_real_time);
 
         Intent intent = getIntent();
-        topic = "dev/" + intent.getStringExtra("macAddress");
+        topic = "dev/" + intent.getStringExtra("macAddress") + "/#";
         System.out.println(topic);
 
         ActionBar actionBar = getSupportActionBar();
