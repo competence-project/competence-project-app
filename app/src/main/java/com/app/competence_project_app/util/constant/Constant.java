@@ -34,7 +34,7 @@ public class Constant {
 
     public static final String FAILURE_WEATHER_DATA_ALL = "WEATHER DATA ALL NOT FOUND: ";
 
-    public static final String BASE_URL = "http://10.0.2.2:8080";
+    public static final String BASE_URL = "http://10.1.4.200:8080";
 
     public static final String RESPONSE_SUCCESS = "RESPONSE SUCCESS";
 

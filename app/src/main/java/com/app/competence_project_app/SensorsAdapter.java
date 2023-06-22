@@ -23,7 +23,7 @@ public class SensorsAdapter extends RecyclerView.Adapter<SensorsAdapter.ViewHold
         this.listener = listener;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView textViewName;
         TextView textViewMAC;
 

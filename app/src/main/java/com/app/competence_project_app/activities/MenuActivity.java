@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.app.competence_project_app.R;
+import com.app.competence_project_app.SensorsListActivity;
 
 public class MenuActivity extends AppCompatActivity {
 

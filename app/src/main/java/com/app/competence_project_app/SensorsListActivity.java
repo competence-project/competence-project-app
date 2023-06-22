@@ -90,10 +90,7 @@ public class SensorsListActivity extends AppCompatActivity {
             return;
         }
 
-        List<SensorStore> savedSensors = Arrays.asList(sensors);
-        if (savedSensors != null) {
-            this.sensors = savedSensors;
-        }
+        this.sensors = new ArrayList<>(Arrays.asList(sensors));
     }
 
     private void saveData() {
